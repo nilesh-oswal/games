@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b35">
+<title>Family Jeopardy · Game Night</title>
+<style>
+:root{color-scheme:dark;--bg:#101b35;--panel:#192747;--tile:#23385f;--tile-hover:#2e4877;--gold:#ffcf75;--text:#f6f4ed;--muted:#a9b6d0;--line:#354465;--green:#93e1ba;--red:#ffaaa4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#253450 0,transparent 50%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.4}button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:4px}button{touch-action:manipulation}button,input{border-radius:10px}button{color:inherit}button:hover:not(:disabled){filter:brightness(1.12)}.shell{max-width:1640px;margin:auto;padding:28px 40px 24px}.masthead{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:30px}.brand{font-size:14px;letter-spacing:.18em;font-weight:800;display:flex;gap:12px;align-items:center}.brand-mark{display:grid;place-items:center;background:var(--gold);color:var(--bg);width:34px;height:34px;border-radius:9px;font-size:24px;letter-spacing:0}.tools{display:flex;gap:8px}.btn{border:1px solid var(--line);background:transparent;padding:10px 15px;font-size:13px;font-weight:650}.btn.primary{background:var(--gold);color:#17213b;border-color:var(--gold)}.btn.quiet{border-color:transparent;color:var(--muted)}.btn.danger{color:var(--red);border-color:#85514f}.intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:25px}.eyebrow{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);font-weight:750;margin:0 0 10px}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(32px,3.5vw,52px);font-weight:400;letter-spacing:-.025em;line-height:1.12;margin:0 0 10px}.subtitle{color:var(--muted);font-size:14px;margin:0;line-height:1.6}.progress-wrap{min-width:185px;text-align:right}.progress-caption{font-size:12px;color:var(--muted);margin-bottom:10px}.progress-track{height:4px;background:var(--line);border-radius:8px;overflow:hidden}.progress-fill{height:100%;background:var(--gold);width:0;transition:width .3s}.game-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}.game-tab{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:transparent;padding:12px 18px;font-size:13px;color:var(--muted);font-weight:650}.game-tab.active{border-color:var(--gold);background:#ffcf7510;color:var(--gold)}.game-num{font-size:10px;opacity:.7;letter-spacing:.04em}.board-scroll{overflow-x:auto;padding:3px;margin:-3px}.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;min-width:600px}.category{display:flex;align-items:center;justify-content:center;text-align:center;min-height:70px;padding:12px 8px;border-top:2px solid var(--gold);background:#ffffff06;border-radius:5px 5px 0 0;font-size:clamp(11px,1.1vw,16px);font-weight:750;line-height:1.4}.clue{min-height:82px;border:1px solid #ffffff05;background:linear-gradient(145deg,#283f69,#203458);color:var(--gold);font-size:clamp(24px,2.7vw,42px);font-family:Georgia,"Times New Roman",serif;font-weight:700;transition:transform .15s,background .15s,opacity .15s;text-shadow:0 2px 0 #0003}.clue:hover:not(:disabled){background:var(--tile-hover);transform:translateY(-2px)}.clue.played{background:#ffffff03;border:1px solid #ffffff05;color:#63728d;text-shadow:none;font:18px system-ui;opacity:.48}.board-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:17px 0 24px;font-size:12px;color:var(--muted)}.timer-note{display:flex;align-items:center;gap:8px}.timer-dot{width:7px;height:7px;background:var(--green);border-radius:50%}.team-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.label{font-size:10px;font-weight:750;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}.team-note{font-size:12px;color:var(--muted)}.teams{display:grid;grid-template-columns:repeat(var(--team-count,4),minmax(0,1fr));gap:10px}.team{position:relative;text-align:left;border:1px solid var(--line);background:#ffffff03;padding:14px 17px;min-width:0}.team.active{border-color:var(--gold);background:#ffcf7509}.team-name{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);margin-bottom:6px}.team.active .team-name{color:var(--gold)}.team-score{font-size:25px;letter-spacing:-.03em;font-weight:750}.team.active:after{content:"●";position:absolute;right:12px;top:10px;color:var(--gold);font-size:9px}.bottom{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-top:20px;font-size:11px;color:#8e9db9}.bottom button{font-size:11px;padding:6px 8px}kbd{font:10px inherit;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:2px 5px;margin:0 3px;color:var(--muted)}.status{min-height:18px;color:var(--green)}dialog{color:var(--text);border:1px solid #465573;border-radius:20px;background:var(--bg);box-shadow:0 24px 100px #0009;padding:0;max-height:94dvh;max-width:calc(100vw - 28px)}dialog::backdrop{background:#060c1dd9;backdrop-filter:blur(7px)}.question-dialog{width:1080px}.question-inner{padding:30px 38px}.question-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.question-meta{font-size:12px;color:var(--gold);font-weight:750;letter-spacing:.08em;text-transform:uppercase}.close{font-size:24px;line-height:1;border:0;background:transparent;color:var(--muted);padding:6px 10px}.timer-area{display:flex;align-items:center;gap:12px}.timer{font-size:25px;font-weight:750;font-variant-numeric:tabular-nums;min-width:72px;text-align:right}.timer.low{color:var(--red)}.timer-controls{display:flex;gap:5px}.timer-controls button{font-size:11px;padding:7px 10px}.time-track{height:3px;background:var(--line);margin:22px 0 0}.time-fill{height:100%;background:var(--gold);width:100%;transition:width .2s linear}.question-body{text-align:center;padding:38px 12px 26px;min-height:245px;display:flex;flex-direction:column;justify-content:center}.question-text{font-family:Georgia,"Times New Roman",serif;font-size:clamp(26px,3vw,43px);font-weight:400;line-height:1.35;margin:0}.question-helper{font-size:12px;color:var(--muted);margin:18px 0 0;line-height:1.5}.answer{margin:12px 0 8px;padding:22px;background:#93e1ba0d;border:1px solid #93e1ba40;border-radius:12px;text-align:center}.answer .label{color:var(--green)}.answer-text{font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--green);margin:10px 0 0;line-height:1.4}.answer-note{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0 0}.question-actions{display:flex;justify-content:center;gap:10px;margin:15px 0 25px;flex-wrap:wrap}.question-actions .btn{padding:13px 24px;font-size:14px}.question-teams{border-top:1px solid var(--line);padding-top:20px}.question-team-list{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}.pick-team{border:1px solid var(--line);background:transparent;padding:9px 14px;font-size:12px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pick-team.active{color:var(--gold);border-color:var(--gold);background:#ffcf750c}.question-bottom{font-size:11px;text-align:center;color:var(--muted);margin:18px 0 0;line-height:1.7}.small-dialog{width:620px;padding:30px}.small-dialog h2{font-family:Georgia,serif;font-size:32px;font-weight:400;margin:0 0 10px}.small-dialog p,.small-dialog li{color:var(--muted);font-size:14px;line-height:1.7}.small-dialog .dialog-header{display:flex;justify-content:space-between;align-items:start}.roster{margin:22px 0}.roster-labels,.roster-row{display:grid;grid-template-columns:minmax(100px,1fr) 110px 38px;gap:9px;align-items:center;margin:9px 0}.roster-labels{font-size:11px;color:var(--muted)}input{width:100%;min-width:0;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:11px;font-size:14px}.remove-team{border:1px solid var(--line);background:transparent;padding:10px 5px;color:var(--red)}.dialog-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:23px}.form-error{color:var(--red);font-size:13px;min-height:18px}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 20px;background:var(--gold);color:var(--bg);border-radius:10px;box-shadow:0 4px 20px #0005;font-size:13px;font-weight:650;z-index:5;max-width:90vw;text-align:center}#toast:empty{display:none}[hidden]{display:none!important}body:has(dialog[open]){overflow:hidden}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1600px){.clue{min-height:100px}.category{min-height:80px}.shell{padding-top:36px}.masthead{margin-bottom:38px}}
+@media(max-height:850px) and (min-width:900px){.shell{padding-top:18px}.masthead{margin-bottom:19px}.intro{margin-bottom:18px}h1{font-size:38px}.game-tabs{margin-bottom:17px}.category{min-height:58px}.clue{min-height:65px}.board-footer{margin:12px 0 16px}.team{padding:10px 15px}.bottom{margin-top:13px}.question-inner{padding:20px 30px}.question-body{min-height:190px;padding:25px 10px}.question-text{font-size:34px}}
+@media(min-width:900px){.shell{height:100dvh;min-height:660px;display:flex;flex-direction:column}.shell>*{flex-shrink:0}.board-scroll{flex:1;min-height:260px;overflow-y:auto}.board{height:100%;grid-template-rows:52px repeat(5,minmax(34px,1fr))}.category,.clue{min-height:0}.clue{font-size:clamp(25px,3.5vh,42px)}.intro{margin-bottom:20px}.masthead{margin-bottom:22px}.game-tabs{margin-bottom:18px}.board-footer{margin:13px 0 18px}.bottom{margin-top:14px}}
+@media(max-height:850px) and (min-width:900px){.board{gap:6px;grid-template-rows:44px repeat(5,minmax(32px,1fr))}}
+@media(max-width:800px){.shell{padding:20px}.masthead{align-items:start;margin-bottom:26px}.brand{font-size:11px;letter-spacing:.1em}.brand-mark{width:28px;height:28px;font-size:20px}.tools{gap:2px;flex-wrap:wrap;justify-content:end}.tools .btn{font-size:11px;padding:8px}.intro{align-items:start}.progress-wrap{min-width:90px;margin-top:8px}.game-tab{padding:10px;font-size:11px;gap:6px}.board{gap:7px}.clue{min-height:72px}.teams{grid-template-columns:repeat(2,minmax(0,1fr))}.team-note{font-size:10px}.bottom{align-items:start}.keyboard-hints{display:none}.question-inner{padding:20px}.question-top{flex-wrap:wrap}.question-meta{font-size:10px;max-width:180px}.timer{font-size:22px;min-width:58px}.timer-area{gap:5px}.question-body{min-height:200px;padding:28px 0 20px}.question-text{font-size:29px}.question-actions .btn{padding:12px 16px}.small-dialog{padding:23px}.board-footer{align-items:start}.board-footer span:last-child{text-align:right}.brand-word{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Bilingual clues use system Devanagari fonts, with no network dependency. */
+.question-hindi,.answer-hindi{font-family:"Kohinoor Devanagari","Nirmala UI","Devanagari Sangam MN",Mangal,system-ui,sans-serif;white-space:pre-line;line-height:1.65;overflow-wrap:anywhere}
+.question-hindi{font-size:clamp(20px,2.1vw,29px);color:#e0e7f3;margin:18px 0 0}
+.answer-hindi{font-size:clamp(19px,1.9vw,26px);color:var(--green);font-weight:600;margin:12px 0 0}
+.question-dialog .question-text{font-size:clamp(24px,2.6vw,36px)}
+.question-dialog .question-body{padding-top:24px;padding-bottom:20px;min-height:0}
+.question-dialog .answer{padding:18px}
+
+/* Emoji puzzles are inline data; answers and explanations stay behind Reveal. */
+.question-emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:clamp(36px,5.1vw,68px);line-height:1.65;margin:0 0 18px;text-wrap:balance;overflow-wrap:anywhere}
+.answer-note{white-space:pre-line}
+@media(max-height:850px) and (min-width:900px){.category{padding:4px 8px;font-size:12px}.question-emoji{font-size:48px;margin-bottom:12px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span> GAME NIGHT <span class="brand-word" style="color:var(--muted);font-weight:400;letter-spacing:.06em">/ FAMILY JEOPARDY</span></div>
+    <nav class="tools" aria-label="Game tools"><button class="btn" id="helpBtn">How to play</button><button class="btn" id="teamsBtn">Edit teams</button><button class="btn" id="fullscreenBtn">⛶ Fullscreen</button></nav>
+  </header>
+  <section class="intro" aria-labelledby="gameTitle">
+    <div><p class="eyebrow" id="gameEyebrow">01 / THE WARM-UP</p><h1 id="gameTitle">Family Face-Off</h1><p class="subtitle" id="gameSubtitle">A little curiosity. A little teamwork. Something for everyone.</p></div>
+    <div class="progress-wrap"><div class="progress-caption" id="progressCaption">0 of 30 played</div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+  </section>
+  <nav class="game-tabs" aria-label="Choose a game" id="gameTabs"></nav>
+  <section aria-label="Jeopardy board" class="board-scroll"><div id="board" class="board"></div></section>
+  <div class="board-footer"><span class="timer-note"><span class="timer-dot" aria-hidden="true"></span>90 seconds per question</span><span id="boardMessage">Pick a team below, then choose a clue.</span></div>
+  <section aria-label="Team scoreboard"><div class="team-heading"><span class="label">The teams</span><span class="team-note">Scores carry across all 4 games · click a team to select</span></div><div class="teams" id="scoreboard"></div></section>
+  <footer class="bottom"><span id="saveStatus">Progress saves automatically in this browser.</span><span class="keyboard-hints"><kbd>F</kbd> Fullscreen <span style="margin:0 6px">·</span><kbd>?</kbd> Help</span><div><button class="btn quiet" id="undoBtn" disabled>↶ Undo</button><button class="btn quiet" id="resetBtn">New night</button></div></footer>
+</main>
+
+<dialog class="question-dialog" id="questionDialog" aria-labelledby="questionText" aria-describedby="questionMeta">
+ <div class="question-inner">
+  <div class="question-top"><div class="question-meta" id="questionMeta"></div><div class="timer-area"><span class="timer" id="timer" role="timer" aria-label="Time remaining">1:30</span><div class="timer-controls"><button class="btn" id="pauseBtn" aria-label="Pause timer">Pause</button><button class="btn" id="restartBtn" aria-label="Restart timer at 90 seconds">↺ 90s</button></div><button class="close" id="closeQuestionBtn" aria-label="Back to board">×</button></div></div>
+  <div class="time-track"><div class="time-fill" id="timeFill"></div></div>
+  <div class="question-body"><p class="question-emoji" id="questionEmoji" hidden></p><h2 class="question-text" id="questionText" lang="en"></h2><p class="question-hindi" id="questionHindi" lang="hi"></p><p class="question-helper" id="questionHelper">Talk it over with your team. Answers in Hindi or English are welcome.</p></div>
+  <div class="answer" id="answerBox" hidden><span class="label">The answer</span><p class="answer-text" id="answerText" lang="en"></p><p class="answer-hindi" id="answerHindi" lang="hi"></p><p class="answer-note" id="answerNote"></p></div>
+  <div class="question-actions"><button class="btn primary" id="revealBtn">Reveal answer</button><button class="btn primary" id="awardBtn" hidden></button><button class="btn" id="noWinnerBtn" hidden>No winner · next clue</button><button class="btn" id="laterBtn">Back · save for later</button></div>
+  <div class="question-teams"><div class="label" style="text-align:center">Select the team to receive points</div><div class="question-team-list" id="questionTeams"></div></div>
+  <p class="question-bottom">Friendly scoring: correct answers earn points; no deductions.<br><kbd>Space</kbd> Pause / resume <span style="margin:0 6px">·</span><kbd>R</kbd> Reveal <span style="margin:0 6px">·</span><kbd>Esc</kbd> Back to board</p>
+ </div>
+</dialog>
+
+<dialog class="small-dialog" id="teamsDialog" aria-labelledby="teamsTitle">
+ <div class="dialog-header"><h2 id="teamsTitle">Meet the teams.</h2><button class="close" data-close="teamsDialog" aria-label="Cancel editing teams">×</button></div>
+ <p>Make 1–8 teams. Mix parents and kids, or play family against family. You can also correct scores here.</p>
+ <form id="teamsForm"><div class="roster-labels"><span>Team name</span><span>Points</span><span></span></div><div class="roster" id="roster"></div><button class="btn" type="button" id="addTeamBtn">+ Add a team</button><p class="form-error" id="teamsError" role="alert"></p><div class="dialog-actions"><button class="btn" type="button" data-close="teamsDialog">Cancel</button><button class="btn primary" type="submit">Save teams</button></div></form>
+</dialog>
+
+<dialog class="small-dialog" id="helpDialog" aria-labelledby="helpTitle">
+ <div class="dialog-header"><h2 id="helpTitle">A little friendly rivalry.</h2><button class="close" data-close="helpDialog" aria-label="Close instructions">×</button></div>
+ <ol><li><strong>Make your teams.</strong> Use “Edit teams” for names and starting scores. One person hosts from the laptop; everyone watches the TV.</li><li><strong>Choose a clue.</strong> Pick a team, then any points tile. Each board has 6 categories and 30 questions, from 100 to 500 points.</li><li><strong>You have 90 seconds.</strong> The timer starts when a clue opens. Pause or restart it whenever needed. At zero, it stops; the answer stays hidden until the host reveals it.</li><li><strong>Reveal and award.</strong> Choose the answering team, reveal the answer, then award points. If nobody gets it, choose “No winner.” Accept equivalent wording and Hindi or English answers; no question-form phrasing required.</li><li><strong>Keep the party moving.</strong> Switch between all four boards whenever you like. Scores carry across them. “Undo” reverses the last scoring, team edit, or restart action.</li></ol>
+ <p>Before reveal, closing a clue saves it for later. After reveal, closing uses the clue without awarding points. “New night” clears all boards and scores but keeps team names.</p>
+ <p>Everything runs offline. Scores and played clues save in this browser when browser storage is available. An unfinished question reopens fresh after a page reload.</p>
+ <div class="dialog-actions"><button class="btn primary" data-close="helpDialog">Let’s play</button></div>
+</dialog>
+
+<dialog class="small-dialog" id="resetDialog" aria-labelledby="resetTitle"><h2 id="resetTitle">Start a new game night?</h2><p>This clears all 120 played clues and sets every team’s score to zero. Your team names stay. You can undo this until you reload the page.</p><div class="dialog-actions"><button class="btn" data-close="resetDialog">Keep playing</button><button class="btn danger" id="confirmResetBtn">Start a new night</button></div></dialog>
+<div id="announcer" class="sr-only" aria-live="polite"></div><div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+// Each category has five [English question, English answer, host note, Hindi question, Hindi answer, optional emoji puzzle] entries.
+// Film-credit references: https://www.yashrajfilms.com/movies/rocket-singh-salesman-of-the-year
+// https://www.excelmovies.com/directors/zoya-akhtar/
+// https://www.redchillies.com/movies/om-shanti-om
+// https://www.yashrajfilms.com/movies/black
+const GAMES = [
+ {
+  "title": "Family Face-Off",
+  "eyebrow": "01 / THE CHALLENGE",
+  "subtitle": "Hard edition · deeper knowledge, clever reasoning, and real teamwork.",
+  "categories": [
+   {
+    "name": "Around the World",
+    "clues": [
+     [
+      "Which strait separates Spain from Morocco?",
+      "The Strait of Gibraltar",
+      "",
+      "कौन-सी जलसंधि स्पेन को मोरक्को से अलग करती है?",
+      "जिब्राल्टर जलसंधि"
+     ],
+     [
+      "Name the two countries that share the island of Hispaniola.",
+      "Haiti and the Dominican Republic",
+      "Both are required.",
+      "हिस्पानिओला द्वीप किन दो देशों में बँटा हुआ है?",
+      "हैती और डोमिनिकन गणराज्य"
+     ],
+     [
+      "Which country is completely surrounded by South Africa?",
+      "Lesotho",
+      "",
+      "कौन-सा देश चारों ओर से दक्षिण अफ्रीका से घिरा हुआ है?",
+      "लेसोथो"
+     ],
+     [
+      "Name the four national capitals through which the Danube flows.",
+      "Vienna, Bratislava, Budapest, and Belgrade",
+      "All four are required.",
+      "उन चार देशों की राजधानियों के नाम बताइए जिनसे होकर डेन्यूब नदी बहती है।",
+      "वियना, ब्रातिस्लावा, बुडापेस्ट और बेलग्रेड"
+     ],
+     [
+      "Which TWO landlocked countries each share land borders with both China and Russia?",
+      "Mongolia and Kazakhstan",
+      "Both are required.",
+      "ऐसे कौन-से दो स्थलरुद्ध देश हैं जिनमें से प्रत्येक की भूमि-सीमा चीन और रूस, दोनों से लगती है?",
+      "मंगोलिया और कज़ाख़स्तान"
+     ]
+    ]
+   },
+   {
+    "name": "Khaana Peena",
+    "clues": [
+     [
+      "Which spice is made from the dried stigmas of a crocus flower?",
+      "Saffron / kesar",
+      "",
+      "क्रोकस फूल के सूखे वर्तिकाग्रों से कौन-सा मसाला बनाया जाता है?",
+      "केसर"
+     ],
+     [
+      "What is the main difference between atta and maida in terms of the parts of the wheat grain retained?",
+      "Atta is whole-wheat flour; refined maida mainly retains the endosperm.",
+      "Accept: atta includes bran and germ; maida has them largely removed.",
+      "गेहूँ के दाने के कौन-से हिस्से बचे रहते हैं—इस आधार पर आटे और मैदे में मुख्य अंतर क्या है?",
+      "आटा साबुत गेहूँ से बनता है; परिष्कृत मैदे में मुख्यतः भ्रूणपोष बचता है।"
+     ],
+     [
+      "Baking soda needs an acid to release gas in a batter. What TWO components does baking powder already contain to do this?",
+      "An alkaline base (usually baking soda) and a dry acid",
+      "Starch is often also present, but the base and acid are the required pair.",
+      "घोल में गैस बनाने के लिए बेकिंग सोडा को अम्ल चाहिए। इस काम के लिए बेकिंग पाउडर में कौन-से दो घटक पहले से होते हैं?",
+      "एक क्षारीय पदार्थ, आमतौर पर बेकिंग सोडा, और एक सूखा अम्ल"
+     ],
+     [
+      "What reaction between amino acids and sugars creates much of the browned flavor on a tandoori crust?",
+      "The Maillard reaction",
+      "Caramelization alone is not the answer: that involves sugars without requiring amino acids.",
+      "अमीनो अम्लों और शर्करा के बीच कौन-सी अभिक्रिया तंदूरी खाने की भूरी सतह का विशेष स्वाद पैदा करती है?",
+      "मैयार अभिक्रिया"
+     ],
+     [
+      "Name the traditional FIVE spices in Bengali panch phoron.",
+      "Cumin, fennel, fenugreek, nigella, and mustard",
+      "Accept jeera, saunf, methi, kalonji, and rai/sarson. All five required; regional substitutions may be accepted by the host.",
+      "बंगाली पंच फोरन के पाँच पारंपरिक मसालों के नाम बताइए।",
+      "जीरा, सौंफ, मेथी, कलौंजी और राई या सरसों"
+     ]
+    ]
+   },
+   {
+    "name": "Animal Kingdom",
+    "clues": [
+     [
+      "Name TWO egg-laying mammals.",
+      "Platypus and echidna",
+      "Both are required.",
+      "अंडे देने वाले दो स्तनधारियों के नाम बताइए।",
+      "प्लैटिपस और इकिडना"
+     ],
+     [
+      "What do we call the biological relationship in which both participating species benefit?",
+      "Mutualism",
+      "",
+      "उस जैविक संबंध को क्या कहते हैं जिसमें भाग लेने वाली दोनों प्रजातियों को लाभ होता है?",
+      "पारस्परिक लाभ वाला सहजीवन, अर्थात म्यूचुअलिज़्म"
+     ],
+     [
+      "A whale has flippers and lives underwater. Give TWO biological features that classify it as a mammal rather than a fish.",
+      "It breathes air with lungs and feeds its young milk.",
+      "Also accept warm-bloodedness or live birth; any two valid mammalian features.",
+      "व्हेल के फ्लिपर होते हैं और वह पानी में रहती है। ऐसी दो जैविक विशेषताएँ बताइए जिनसे वह मछली के बजाय स्तनधारी कहलाती है।",
+      "वह फेफड़ों से हवा में साँस लेती है और अपने बच्चों को दूध पिलाती है।"
+     ],
+     [
+      "Why is a dolphin closer to a human than to a shark on an evolutionary family tree?",
+      "Dolphins and humans share a more recent common ancestor; both are mammals.",
+      "Shared habitat or body shape does not determine closest ancestry.",
+      "विकासवादी वंश-वृक्ष में डॉल्फ़िन, शार्क की तुलना में मनुष्य के अधिक निकट क्यों है?",
+      "डॉल्फ़िन और मनुष्य का साझा पूर्वज अपेक्षाकृत अधिक हाल का है; दोनों स्तनधारी हैं।"
+     ],
+     [
+      "Name the THREE main living groups of mammals, classified by reproduction.",
+      "Monotremes, marsupials, and placental mammals",
+      "Accept egg-laying mammals, pouched mammals, and placental mammals. All three required.",
+      "प्रजनन के आधार पर जीवित स्तनधारियों के तीन मुख्य समूहों के नाम बताइए।",
+      "अंडे देने वाले स्तनधारी, थैलीधारी स्तनधारी और अपरा वाले स्तनधारी—मोनोट्रीम, मार्सूपियल और प्लेसेंटल"
+     ]
+    ]
+   },
+   {
+    "name": "Everyday Science",
+    "clues": [
+     [
+      "Why does a pressure cooker cook food faster: does pressure raise or lower water’s boiling point?",
+      "It raises the boiling point, allowing food to cook at a higher temperature.",
+      "",
+      "प्रेशर कुकर में खाना जल्दी क्यों पकता है: दबाव पानी के क्वथनांक को बढ़ाता है या घटाता है?",
+      "दबाव क्वथनांक बढ़ाता है, जिससे खाना अधिक तापमान पर पकता है।"
+     ],
+     [
+      "An ice cube floats in a glass of water. When it melts completely, does the water level rise, fall, or stay the same?",
+      "It stays the same.",
+      "The floating ice already displaces its own weight of water.",
+      "पानी के गिलास में बर्फ का एक टुकड़ा तैर रहा है। उसके पूरी तरह पिघलने पर पानी का स्तर बढ़ेगा, घटेगा या समान रहेगा?",
+      "पानी का स्तर समान रहेगा।"
+     ],
+     [
+      "A car goes 60 km at 30 km/h, then 60 km at 60 km/h. What is its average speed for the whole trip?",
+      "40 km/h",
+      "120 km divided by 3 hours. Not 45 km/h.",
+      "एक कार पहले 60 किमी की दूरी 30 किमी/घंटा से और अगले 60 किमी की दूरी 60 किमी/घंटा से तय करती है। पूरी यात्रा की औसत चाल क्या है?",
+      "40 किमी/घंटा"
+     ],
+     [
+      "You double the speed of an object without changing its mass. By what factor does its kinetic energy change?",
+      "It becomes four times as large.",
+      "Kinetic energy is proportional to speed squared.",
+      "किसी वस्तु का द्रव्यमान बदले बिना उसकी चाल दोगुनी कर दी जाए, तो उसकी गतिज ऊर्जा कितने गुना हो जाएगी?",
+      "चार गुना"
+     ],
+     [
+      "A sealed rigid tank contains an ideal gas at 27°C. It is heated to 327°C. By what factor does its pressure change?",
+      "It doubles.",
+      "Use absolute temperature: 300 K to 600 K. Volume and amount of gas remain fixed.",
+      "एक सीलबंद, कठोर टंकी में आदर्श गैस 27°C पर है। उसे 327°C तक गर्म किया जाता है। उसका दबाव कितने गुना हो जाएगा?",
+      "दोगुना"
+     ]
+    ]
+   },
+   {
+    "name": "Sports Mix",
+    "clues": [
+     [
+      "Which country hosted and won the men’s football World Cup in 1998?",
+      "France",
+      "",
+      "किस देश ने 1998 के पुरुष फ़ुटबॉल विश्व कप की मेज़बानी भी की और उसे जीता भी?",
+      "फ़्रांस"
+     ],
+     [
+      "Name the FOUR tennis Grand Slam tournaments.",
+      "Australian Open, French Open (Roland-Garros), Wimbledon, and US Open",
+      "All four required.",
+      "टेनिस के चारों ग्रैंड स्लैम टूर्नामेंट के नाम बताइए।",
+      "ऑस्ट्रेलियन ओपन, फ़्रेंच ओपन यानी रोलाँ गैरो, विंबलडन और यूएस ओपन"
+     ],
+     [
+      "Which Indian athlete won the men’s javelin gold at the Tokyo 2020 Olympics, held in 2021?",
+      "Neeraj Chopra",
+      "",
+      "2021 में आयोजित टोक्यो 2020 ओलंपिक में किस भारतीय खिलाड़ी ने पुरुष भाला फेंक में स्वर्ण पदक जीता?",
+      "नीरज चोपड़ा"
+     ],
+     [
+      "In which TWO different sports did Michael Jordan play professionally?",
+      "Basketball and baseball",
+      "Both are required.",
+      "माइकल जॉर्डन ने किन दो अलग-अलग खेलों में पेशेवर रूप से खेला?",
+      "बास्केटबॉल और बेसबॉल"
+     ],
+     [
+      "Which athlete won eight gold medals at a single Olympics, and in which city did that happen?",
+      "Michael Phelps; Beijing (2008)",
+      "Both athlete and city required.",
+      "किस खिलाड़ी ने एक ही ओलंपिक में आठ स्वर्ण पदक जीते, और वह ओलंपिक किस शहर में हुआ था?",
+      "माइकल फ़ेल्प्स; बीजिंग, 2008"
+     ]
+    ]
+   },
+   {
+    "name": "Riddle Me This",
+    "clues": [
+     [
+      "A bat and ball cost ₹110 together. The bat costs ₹100 more than the ball. What does the ball cost?",
+      "₹5",
+      "The bat costs ₹105.",
+      "एक बल्ले और गेंद की कुल कीमत ₹110 है। बल्ला गेंद से ₹100 महँगा है। गेंद की कीमत कितनी है?",
+      "₹5 (पाँच रुपये)"
+     ],
+     [
+      "Five machines make five toys in five minutes. At the same rate, how long do 100 machines take to make 100 toys?",
+      "Five minutes",
+      "",
+      "पाँच मशीनें पाँच मिनट में पाँच खिलौने बनाती हैं। इसी दर से 100 मशीनें 100 खिलौने कितने समय में बनाएँगी?",
+      "पाँच मिनट"
+     ],
+     [
+      "A two-digit number equals seven times the sum of its digits. Reversing its digits makes it 18 smaller. What is the number?",
+      "42",
+      "42 = 7 × (4 + 2); 42 − 24 = 18.",
+      "एक दो-अंकीय संख्या अपने अंकों के योग की सात गुनी है। अंक उलटने पर संख्या 18 कम हो जाती है। वह संख्या क्या है?",
+      "42 (बयालीस)"
+     ],
+     [
+      "You have two ropes, each of which burns for exactly 60 minutes but at an uneven rate. With a lighter, how can you measure 45 minutes?",
+      "Light rope A at both ends and rope B at one end. When A finishes after 30 minutes, light B’s other end. B finishes 15 minutes later.",
+      "",
+      "दो रस्सियाँ हैं। हर रस्सी पूरी जलने में ठीक 60 मिनट लेती है, पर उसकी जलने की गति एकसमान नहीं है। लाइटर की मदद से 45 मिनट कैसे मापेंगे?",
+      "रस्सी क के दोनों सिरों और रस्सी ख के एक सिरे को जलाएँ। क के 30 मिनट में खत्म होते ही ख का दूसरा सिरा जलाएँ। ख 15 मिनट बाद खत्म होगी।"
+     ],
+     [
+      "Four people take 1, 2, 7, and 10 minutes to cross a bridge. At most two cross together, at the slower person’s pace. They need one shared torch on every crossing. What is the minimum total time?",
+      "17 minutes",
+      "1 & 2 cross (2); 1 returns (1); 7 & 10 cross (10); 2 returns (2); 1 & 2 cross (2).",
+      "चार लोगों को पुल पार करने में क्रमशः 1, 2, 7 और 10 मिनट लगते हैं। एक बार में अधिकतम दो लोग धीमे व्यक्ति की चाल से जा सकते हैं। हर बार साथ में एकमात्र मशाल चाहिए। न्यूनतम कुल समय कितना है?",
+      "17 मिनट: 1 और 2 पार जाएँ—2 मिनट; 1 लौटे—1; 7 और 10 जाएँ—10; 2 लौटे—2; फिर 1 और 2 जाएँ—2।"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Desi Connection",
+  "eyebrow": "02 / DESI EXPERT MODE",
+  "subtitle": "Hard edition · film buffs, cricket brains, and culture experts wanted.",
+  "categories": [
+   {
+    "name": "Bollywood Across Generations",
+    "clues": [
+     [
+      "What is Rancho’s real identity at the end of 3 Idiots?",
+      "Phunsukh Wangdu",
+      "Accept a close pronunciation.",
+      "फ़िल्म 3 इडियट्स के अंत में रैंचो की असली पहचान क्या निकलती है?",
+      "फुंसुख वांगडू"
+     ],
+     [
+      "Name the THREE actors who play the title characters in Amar Akbar Anthony, in that order.",
+      "Vinod Khanna, Rishi Kapoor, and Amitabh Bachchan",
+      "The actor-to-character matches must be correct.",
+      "अमर अकबर एंथनी में इन तीनों शीर्षक पात्रों को निभाने वाले अभिनेताओं के नाम इसी क्रम में बताइए।",
+      "विनोद खन्ना, ऋषि कपूर और अमिताभ बच्चन"
+     ],
+     [
+      "What is the full name of Shah Rukh Khan’s NASA scientist character in Swades?",
+      "Mohan Bhargava",
+      "",
+      "स्वदेस में शाहरुख़ ख़ान के नासा वैज्ञानिक पात्र का पूरा नाम क्या है?",
+      "मोहन भार्गव"
+     ],
+     [
+      "Name the village in Sholay AND the actor who plays Thakur Baldev Singh.",
+      "Ramgarh; Sanjeev Kumar",
+      "Both required.",
+      "शोले के गाँव का नाम और ठाकुर बलदेव सिंह की भूमिका निभाने वाले अभिनेता का नाम बताइए।",
+      "रामगढ़; संजीव कुमार"
+     ],
+     [
+      "Name the director shared by Lagaan and Swades, AND the music composer shared by both films.",
+      "Ashutosh Gowariker; A. R. Rahman",
+      "Both required.",
+      "लगान और स्वदेस, दोनों के निर्देशक का नाम और दोनों के संगीतकार का नाम बताइए।",
+      "आशुतोष गोवारिकर; ए. आर. रहमान"
+     ]
+    ]
+   },
+   {
+    "name": "Incredible India",
+    "clues": [
+     [
+      "Which mountain pass links the Kashmir Valley with the road toward Dras, Kargil, and Leh?",
+      "Zoji La",
+      "Accept Zoji La Pass or Zojila.",
+      "कौन-सा पहाड़ी दर्रा कश्मीर घाटी को द्रास, कारगिल और लेह की ओर जाने वाली सड़क से जोड़ता है?",
+      "ज़ोजी ला दर्रा"
+     ],
+     [
+      "Which river flows through a rift valley between the Vindhya and Satpura ranges?",
+      "The Narmada",
+      "",
+      "कौन-सी नदी विंध्य और सतपुड़ा पर्वत-श्रृंखलाओं के बीच भ्रंश घाटी से होकर बहती है?",
+      "नर्मदा"
+     ],
+     [
+      "Dholavira lies on Khadir island in which vast salt-marsh region of Gujarat?",
+      "The Great Rann of Kutch",
+      "Accept Rann of Kutch.",
+      "धोलावीरा गुजरात के किस विशाल नमकीन दलदली क्षेत्र के खदिर द्वीप पर स्थित है?",
+      "कच्छ का महान रण"
+     ],
+     [
+      "Arrange these cities from west to east: Kolkata, Jaipur, Mumbai, Varanasi.",
+      "Mumbai → Jaipur → Varanasi → Kolkata",
+      "Order is by longitude, not latitude.",
+      "इन शहरों को पश्चिम से पूर्व के क्रम में रखिए: कोलकाता, जयपुर, मुंबई, वाराणसी।",
+      "मुंबई → जयपुर → वाराणसी → कोलकाता"
+     ],
+     [
+      "Name the FIVE Indian states through which the Ganga’s main stem flows, from Uttarakhand to the Bangladesh border.",
+      "Uttarakhand, Uttar Pradesh, Bihar, Jharkhand, and West Bengal",
+      "All five required. Tributary states do not count.",
+      "उत्तराखंड से बांग्लादेश सीमा तक गंगा की मुख्य धारा जिन पाँच भारतीय राज्यों से होकर बहती है, उनके नाम बताइए।",
+      "उत्तराखंड, उत्तर प्रदेश, बिहार, झारखंड और पश्चिम बंगाल"
+     ]
+    ]
+   },
+   {
+    "name": "Hindi–English Fun",
+    "clues": [
+     [
+      "What does “aasteen ka saanp” mean figuratively?",
+      "A hidden enemy or traitor among people you trust.",
+      "",
+      "“आस्तीन का साँप” का लाक्षणिक अर्थ क्या है?",
+      "भरोसेमंद लोगों के बीच छिपा हुआ शत्रु या विश्वासघाती व्यक्ति"
+     ],
+     [
+      "Explain “adhjal gagri chhalkat jaaye” rather than translating it word for word.",
+      "People with little knowledge often show off or make the most noise.",
+      "Accept a clear equivalent explanation.",
+      "“अधजल गगरी छलकत जाए” का शब्दशः अनुवाद नहीं, बल्कि भावार्थ समझाइए।",
+      "कम ज्ञान वाले लोग अक्सर अधिक दिखावा करते हैं या अधिक शोर मचाते हैं।"
+     ],
+     [
+      "Give the everyday Hindi meanings of BOTH “anil” and “anal”.",
+      "Anil = wind; anal = fire",
+      "Both required; pronunciation matters.",
+      "“अनिल” और “अनल”, दोनों शब्दों के सामान्य हिंदी अर्थ बताइए।",
+      "अनिल = हवा; अनल = आग"
+     ],
+     [
+      "Translate “a blessing in disguise” into a familiar Hindi expression.",
+      "Chhupe hue vardaan / chhipa hua vardaan",
+      "Accept an accurate equivalent such as a seemingly bad event that turns out beneficial.",
+      "अंग्रेज़ी अभिव्यक्ति “a blessing in disguise” का प्रचलित हिंदी भावार्थ बताइए।",
+      "छिपा हुआ वरदान—शुरू में बुरी लगने वाली घटना का अंत में लाभकारी साबित होना"
+     ],
+     [
+      "In Hindi poetry, which alankaar uses ONE expression to convey more than one meaning?",
+      "Shlesh alankaar",
+      "Distinguish from yamak, where a word is repeated with different meanings.",
+      "हिंदी काव्य में किस अलंकार में एक ही अभिव्यक्ति से एक से अधिक अर्थ निकलते हैं?",
+      "श्लेष अलंकार"
+     ]
+    ]
+   },
+   {
+    "name": "Festivals & Traditions",
+    "clues": [
+     [
+      "Which legendary king is associated with the homecoming celebrated during Onam?",
+      "King Mahabali",
+      "",
+      "ओणम में किस पौराणिक राजा की घर-वापसी का उत्सव मनाया जाता है?",
+      "राजा महाबली"
+     ],
+     [
+      "Durga’s victory over which buffalo demon is central to Durga Puja?",
+      "Mahishasura",
+      "",
+      "दुर्गा पूजा में देवी दुर्गा की किस भैंस-रूपी असुर पर विजय का महत्व है?",
+      "महिषासुर"
+     ],
+     [
+      "In the Holika and Prahlad story, what is the name of Prahlad’s father?",
+      "Hiranyakashipu",
+      "Accept a close pronunciation.",
+      "होलिका और प्रह्लाद की कथा में प्रह्लाद के पिता का नाम क्या है?",
+      "हिरण्यकशिपु"
+     ],
+     [
+      "Name all FIVE of the Sikh articles of faith known as the Five Ks.",
+      "Kesh, Kangha, Kara, Kachera, and Kirpan",
+      "Accept spelling variants. All five required.",
+      "सिख आस्था के पाँच ककारों के नाम बताइए।",
+      "केश, कंघा, कड़ा, कच्छा और कृपाण"
+     ],
+     [
+      "Name the FOUR Indian cities where the major Kumbh Melas rotate.",
+      "Prayagraj, Haridwar, Nashik, and Ujjain",
+      "Accept Allahabad for Prayagraj. All four required.",
+      "भारत के उन चार शहरों के नाम बताइए जहाँ प्रमुख कुंभ मेले बारी-बारी से लगते हैं।",
+      "प्रयागराज, हरिद्वार, नासिक और उज्जैन"
+     ]
+    ]
+   },
+   {
+    "name": "Name That Tune",
+    "clues": [
+     [
+      "Which composer created the music for both Roja and Lagaan?",
+      "A. R. Rahman",
+      "",
+      "रोजा और लगान, दोनों फ़िल्मों का संगीत किसने दिया?",
+      "ए. आर. रहमान"
+     ],
+     [
+      "Which composer was nicknamed Pancham, and who was his composer father?",
+      "R. D. Burman; S. D. Burman",
+      "Both required.",
+      "किस संगीतकार को पंचम कहा जाता था, और उनके संगीतकार पिता का नाम क्या था?",
+      "आर. डी. बर्मन; एस. डी. बर्मन"
+     ],
+     [
+      "Name the lead male singer AND the composer trio behind the title song of Kal Ho Naa Ho.",
+      "Sonu Nigam; Shankar–Ehsaan–Loy",
+      "Both required.",
+      "कल हो ना हो के शीर्षक गीत के मुख्य पुरुष गायक और संगीतकार तिकड़ी का नाम बताइए।",
+      "सोनू निगम; शंकर–एहसान–लॉय"
+     ],
+     [
+      "Vande Mataram appears in which novel, and who wrote that novel?",
+      "Anandamath; Bankim Chandra Chattopadhyay",
+      "Accept Bankim Chandra Chatterjee. Both required.",
+      "वंदे मातरम् किस उपन्यास में है, और उस उपन्यास के लेखक कौन हैं?",
+      "आनंदमठ; बंकिमचंद्र चट्टोपाध्याय"
+     ],
+     [
+      "Give the full names of all THREE musicians in Shankar–Ehsaan–Loy.",
+      "Shankar Mahadevan, Ehsaan Noorani, and Loy Mendonsa",
+      "All three surnames required.",
+      "शंकर–एहसान–लॉय के तीनों संगीतकारों के पूरे नाम बताइए।",
+      "शंकर महादेवन, एहसान नूरानी और लॉय मेंडोंसा"
+     ]
+    ]
+   },
+   {
+    "name": "Cricket Fever",
+    "clues": [
+     [
+      "Which team did India defeat in the 1983 men’s World Cup final, and who captained India?",
+      "West Indies; Kapil Dev",
+      "Both required.",
+      "1983 के पुरुष क्रिकेट विश्व कप फ़ाइनल में भारत ने किस टीम को हराया, और भारत के कप्तान कौन थे?",
+      "वेस्ट इंडीज़; कपिल देव"
+     ],
+     [
+      "Who was at the other end when M. S. Dhoni hit the winning six in the 2011 men’s World Cup final?",
+      "Yuvraj Singh",
+      "",
+      "2011 के पुरुष विश्व कप फ़ाइनल में एम. एस. धोनी के विजयी छक्का लगाने के समय दूसरे छोर पर कौन था?",
+      "युवराज सिंह"
+     ],
+     [
+      "Which Indian bowler took the first hat-trick in men’s ODI World Cup history, in 1987?",
+      "Chetan Sharma",
+      "",
+      "1987 में पुरुष एकदिवसीय विश्व कप इतिहास की पहली हैट्रिक किस भारतीय गेंदबाज़ ने ली?",
+      "चेतन शर्मा"
+     ],
+     [
+      "Against which country did Anil Kumble take all ten wickets in a Test innings in 1999, and in which city?",
+      "Pakistan; Delhi",
+      "Both required. The venue was Feroz Shah Kotla.",
+      "अनिल कुंबले ने 1999 में टेस्ट की एक पारी के सभी दस विकेट किस देश के ख़िलाफ़ और किस शहर में लिए?",
+      "पाकिस्तान; दिल्ली"
+     ],
+     [
+      "Which cricketer played men’s ODI cricket for BOTH Australia and South Africa?",
+      "Kepler Wessels",
+      "",
+      "किस क्रिकेटर ने ऑस्ट्रेलिया और दक्षिण अफ्रीका, दोनों के लिए पुरुष एकदिवसीय अंतरराष्ट्रीय क्रिकेट खेला?",
+      "केप्लर वेसल्स"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Generation Showdown",
+  "eyebrow": "03 / THE GRAND FINALE",
+  "subtitle": "Hard edition · multi-part clues and puzzles. Make those 90 seconds count.",
+  "categories": [
+   {
+    "name": "Gaming Universe",
+    "clues": [
+     [
+      "In Minecraft, which dark block forms when flowing water meets a lava source block?",
+      "Obsidian",
+      "The lava must be a source block.",
+      "माइनक्राफ़्ट में बहता पानी लावा के स्रोत-ब्लॉक से मिलने पर कौन-सा गहरे रंग का ब्लॉक बनता है?",
+      "ऑब्सिडियन"
+     ],
+     [
+      "In Minecraft, traveling 100 blocks horizontally in the Nether corresponds to how many blocks in the Overworld?",
+      "800 blocks",
+      "The horizontal scale is 1:8.",
+      "माइनक्राफ़्ट में नेदर में क्षैतिज दिशा में 100 ब्लॉक चलना ओवरवर्ल्ड में कितने ब्लॉक के बराबर है?",
+      "800 ब्लॉक"
+     ],
+     [
+      "Name the THREE legendary birds introduced in the original Pokémon games.",
+      "Articuno, Zapdos, and Moltres",
+      "All three required.",
+      "मूल पोकेमॉन खेलों में शामिल तीन प्रसिद्ध पौराणिक पक्षियों के नाम बताइए।",
+      "आर्टिकुनो, ज़ैपडोस और मोल्ट्रेस"
+     ],
+     [
+      "On an otherwise empty chessboard, how many legal destination squares can a knight have at most, and how many from a corner?",
+      "Eight at most; two from a corner",
+      "Both required.",
+      "बाकी सभी खाने खाली हों, तो शतरंज का घोड़ा अधिकतम कितने खानों में जा सकता है? कोने से कितने खानों में?",
+      "अधिकतम आठ; कोने से दो"
+     ],
+     [
+      "In 2048, using only starting tiles of value 2, how many individual merge operations are needed to produce ONE 2048 tile?",
+      "1,023 merges",
+      "It takes 1,024 tiles of value 2. Each merge reduces the number of tiles by one.",
+      "2048 खेल में केवल 2 मूल्य वाली शुरुआती टाइलों से एक 2048 टाइल बनाने के लिए कुल कितने विलय करने होंगे?",
+      "1,023 विलय"
+     ]
+    ]
+   },
+   {
+    "name": "Movies & Animation",
+    "clues": [
+     [
+      "What is the name of the rabbit police officer in Zootopia?",
+      "Judy Hopps",
+      "",
+      "ज़ूटोपिया में खरगोश पुलिस अधिकारी का नाम क्या है?",
+      "जूडी हॉप्स"
+     ],
+     [
+      "In Ratatouille, name BOTH the rat and the young kitchen worker he helps.",
+      "Remy and Alfredo Linguini",
+      "Accept Linguini. Both required.",
+      "रैटटूई में चूहे और उस युवा रसोई-कर्मचारी, जिसकी वह मदद करता है, दोनों के नाम बताइए।",
+      "रेमी और अल्फ्रेडो लिंगुइनी"
+     ],
+     [
+      "In Coco, how is Héctor related to Miguel, and which famous musician stole Héctor’s songs?",
+      "His great-great-grandfather; Ernesto de la Cruz",
+      "Both required.",
+      "कोको में हेक्टर का मिगेल से क्या रिश्ता है, और किस प्रसिद्ध संगीतकार ने हेक्टर के गीत चुराए थे?",
+      "वह मिगेल की परदादी के पिता हैं; अर्नेस्टो दे ला क्रूज़"
+     ],
+     [
+      "In Harry Potter, what are the THREE Deathly Hallows?",
+      "The Elder Wand, the Resurrection Stone, and the Invisibility Cloak",
+      "All three required.",
+      "हैरी पॉटर में तीन डेथली हैलोज़ कौन-से हैं?",
+      "एल्डर वैंड, पुनर्जीवन का पत्थर यानी रेज़रेक्शन स्टोन, और अदृश्यता का चोगा यानी इनविज़िबिलिटी क्लोक"
+     ],
+     [
+      "In The Lord of the Rings, name the THREE Elven Rings of Power.",
+      "Narya, Nenya, and Vilya",
+      "Accept close pronunciations. All three required.",
+      "द लॉर्ड ऑफ़ द रिंग्स में एल्व्स की शक्ति वाली तीन अंगूठियों के नाम बताइए।",
+      "नार्या, नेन्या और विल्या"
+     ]
+    ]
+   },
+   {
+    "name": "Space Explorers",
+    "clues": [
+     [
+      "Which planet takes longer to rotate once on its axis than it takes to orbit the Sun?",
+      "Venus",
+      "Use its sidereal rotation period, not the length of its solar day.",
+      "कौन-सा ग्रह सूर्य की एक परिक्रमा करने की तुलना में अपनी धुरी पर एक चक्कर लगाने में अधिक समय लेता है?",
+      "शुक्र"
+     ],
+     [
+      "Name Jupiter’s FOUR Galilean moons.",
+      "Io, Europa, Ganymede, and Callisto",
+      "All four required.",
+      "बृहस्पति के चार गैलीलियन उपग्रहों के नाम बताइए।",
+      "आयो, यूरोपा, गैनीमीड और कैलिस्टो"
+     ],
+     [
+      "Which nuclear process powers the Sun, and which element is its main fuel?",
+      "Nuclear fusion; hydrogen",
+      "Both required. Hydrogen fuses into helium.",
+      "सूर्य को ऊर्जा देने वाली नाभिकीय प्रक्रिया कौन-सी है, और उसका मुख्य ईंधन कौन-सा तत्व है?",
+      "नाभिकीय संलयन; हाइड्रोजन"
+     ],
+     [
+      "What is the nearest star to the Sun?",
+      "Proxima Centauri",
+      "",
+      "सूर्य के सबसे निकट वाला तारा कौन-सा है?",
+      "प्रॉक्सिमा सेंटॉरी"
+     ],
+     [
+      "Give the TWO terms for the points in an orbit where a planet is nearest to and farthest from the Sun.",
+      "Perihelion (nearest) and aphelion (farthest)",
+      "Both required with correct meanings.",
+      "ग्रह की कक्षा में सूर्य से सबसे निकट और सबसे दूर स्थित बिंदुओं के नाम बताइए।",
+      "उपसौर यानी पेरिहीलियन—सबसे निकट; अपसौर यानी एपहीलियन—सबसे दूर"
+     ]
+    ]
+   },
+   {
+    "name": "Tech Detectives",
+    "clues": [
+     [
+      "What does the S in HTTPS stand for, and what does HTTPS protect while data travels?",
+      "Secure; it encrypts data in transit.",
+      "Both required. It does not guarantee that a website’s claims are truthful.",
+      "HTTPS में S का क्या अर्थ है, और डेटा भेजे जाते समय HTTPS उसकी सुरक्षा कैसे करता है?",
+      "S का अर्थ सिक्योर है; यह भेजे जा रहे डेटा को एन्क्रिप्ट करता है।"
+     ],
+     [
+      "Convert the binary number 110101 to decimal.",
+      "53",
+      "32 + 16 + 4 + 1.",
+      "बाइनरी संख्या 110101 को दशमलव संख्या में बदलिए।",
+      "53 (तिरपन)"
+     ],
+     [
+      "What does DNS do when you enter a website’s domain name?",
+      "It resolves the domain name to an IP address.",
+      "Accept translates a website name into the address computers use.",
+      "आप किसी वेबसाइट का डोमेन नाम दर्ज करते हैं, तो DNS क्या करता है?",
+      "वह डोमेन नाम के लिए आईपी पता खोजता है।"
+     ],
+     [
+      "Which search algorithm repeatedly halves a sorted list to locate a target?",
+      "Binary search",
+      "",
+      "क्रमबद्ध सूची में लक्ष्य खोजने के लिए कौन-सा एल्गोरिद्म हर कदम पर खोज का दायरा आधा करता है?",
+      "बाइनरी सर्च यानी द्विआधारी खोज"
+     ],
+     [
+      "IPv4 addresses have 32 bits. How many distinct bit patterns are theoretically possible?",
+      "4,294,967,296 (2³²)",
+      "Accept 2 to the power of 32, or about 4.29 billion. This includes reserved addresses.",
+      "IPv4 पते 32 बिट के होते हैं। सैद्धांतिक रूप से कितने अलग बिट-पैटर्न संभव हैं?",
+      "4,294,967,296 यानी 2 की घात 32; लगभग 4.29 अरब"
+     ]
+    ]
+   },
+   {
+    "name": "Emoji Decoder",
+    "clues": [
+     [
+      "Decode the Hindi film title: 👽 📻 🏜️",
+      "PK",
+      "An alien, his radio-like remote, and the desert.",
+      "इन इमोजी से हिंदी फ़िल्म का नाम पहचानिए: 👽 📻 🏜️",
+      "पीके"
+     ],
+     [
+      "Decode the Hindi film title: 🍱 🚆 💌",
+      "The Lunchbox",
+      "A lunch delivery leads to an exchange of letters.",
+      "इन इमोजी से हिंदी फ़िल्म का नाम पहचानिए: 🍱 🚆 💌",
+      "द लंचबॉक्स"
+     ],
+     [
+      "Decode the Hindi film title: 👨‍🦯 🎹 🔪",
+      "Andhadhun",
+      "A supposedly blind pianist becomes entangled in a crime.",
+      "इन इमोजी से हिंदी फ़िल्म का नाम पहचानिए: 👨‍🦯 🎹 🔪",
+      "अंधाधुन"
+     ],
+     [
+      "Decode the Hindi film title: 👨‍🚀 🇺🇸 ➡️ 🇮🇳 💡",
+      "Swades",
+      "A NASA scientist returns to India and helps bring electricity to a village.",
+      "इन इमोजी से हिंदी फ़िल्म का नाम पहचानिए: 👨‍🚀 🇺🇸 ➡️ 🇮🇳 💡",
+      "स्वदेस"
+     ],
+     [
+      "Decode this 1983 Hindi film: 👬 📸 🏗️ ⚰️",
+      "Jaane Bhi Do Yaaro",
+      "Two photographers uncover corruption; a coffin and a chaotic stage scene feature in the story.",
+      "इन इमोजी से 1983 की हिंदी फ़िल्म पहचानिए: 👬 📸 🏗️ ⚰️",
+      "जाने भी दो यारो"
+     ]
+    ]
+   },
+   {
+    "name": "Bachpan: Then & Now",
+    "clues": [
+     [
+      "What did you have to rewind with a pencil when its magnetic tape got loose?",
+      "An audio cassette",
+      "The pencil turns a cassette reel.",
+      "किस वस्तु की चुंबकीय टेप ढीली हो जाने पर उसे पेंसिल से वापस लपेटना पड़ता था?",
+      "ऑडियो कैसेट"
+     ],
+     [
+      "In Roman numerals, what number is XLIX?",
+      "49",
+      "XL = 40; IX = 9.",
+      "रोमन अंकों में XLIX कौन-सी संख्या है?",
+      "49 (उनचास)"
+     ],
+     [
+      "You write all the numbers from 1 through 100. How many times do you write the digit 9?",
+      "20 times",
+      "Ten in the units position and ten in the tens position; 99 contributes twice.",
+      "आप 1 से 100 तक की सभी संख्याएँ लिखते हैं। अंक 9 कुल कितनी बार लिखेंगे?",
+      "20 बार"
+     ],
+     [
+      "A clock shows 3:15. What is the SMALLER angle between its hour and minute hands?",
+      "7.5 degrees",
+      "The hour hand has moved one quarter of the way from 3 to 4.",
+      "घड़ी में 3:15 बजे हैं। घंटे और मिनट की सुइयों के बीच छोटा कोण कितने अंश का होगा?",
+      "7.5 अंश"
+     ],
+     [
+      "A book’s pages are numbered from 1 to 100. How many individual digits are printed in those page numbers?",
+      "192 digits",
+      "9 one-digit pages + 90 two-digit pages + one three-digit page: 9 + 180 + 3.",
+      "एक किताब के पृष्ठों पर 1 से 100 तक क्रमांक छपे हैं। इन सभी पृष्ठ-संख्याओं को छापने में कुल कितने अंकों का इस्तेमाल हुआ है?",
+      "192 अंक"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Bollywood Emoji Challenge",
+  "eyebrow": "04 / LIGHTS, CAMERA, EMOJIS",
+  "subtitle": "Moderate difficulty · decode the movies, stars, music, and filmi connections.",
+  "categories": [
+   {
+    "name": "Bollywood Movies",
+    "clues": [
+     [
+      "Guess the Bollywood movie.",
+      "Queen",
+      "A cancelled wedding, then a solo honeymoon in Paris and Amsterdam.\nटूटी शादी के बाद पेरिस और एम्स्टर्डम में अकेले हनीमून की यात्रा।",
+      "इमोजी से बॉलीवुड फ़िल्म का नाम पहचानिए।",
+      "क्वीन",
+      "👰❌ ✈️ 🇫🇷 🇳🇱"
+     ],
+     [
+      "Guess the Bollywood movie.",
+      "Mission Mangal",
+      "Women scientists, a rocket, and the red planet: India’s Mars mission.\nमहिला वैज्ञानिक, रॉकेट और लाल ग्रह—भारत के मंगल अभियान की कहानी।",
+      "इमोजी से बॉलीवुड फ़िल्म का नाम पहचानिए।",
+      "मिशन मंगल",
+      "👩‍🔬 👩‍🔬 🚀 🔴"
+     ],
+     [
+      "Guess the Bollywood movie.",
+      "Kahaani",
+      "An apparently pregnant woman searches Kolkata for her missing husband; appearances conceal a twist.\nगर्भवती दिखने वाली महिला कोलकाता में अपने लापता पति को खोजती है; अंत में रहस्य खुलता है।",
+      "इमोजी से बॉलीवुड फ़िल्म का नाम पहचानिए।",
+      "कहानी",
+      "🤰 🔍 🚋 🎭"
+     ],
+     [
+      "Guess the Bollywood movie.",
+      "Rockstar",
+      "A musician, heartbreak, and the Prague connection.\nसंगीतकार, टूटा दिल और प्राग से जुड़ी कहानी।",
+      "इमोजी से बॉलीवुड फ़िल्म का नाम पहचानिए।",
+      "रॉकस्टार",
+      "👨‍🎤 🎸 💔 🇨🇿"
+     ],
+     [
+      "Guess the Bollywood movie.",
+      "Rocket Singh: Salesman of the Year",
+      "Rocket + a Sikh salesman + his computer-sales business. Accept Rocket Singh.\nरॉकेट, सिख सेल्समैन और कंप्यूटर बेचने का कारोबार। केवल रॉकेट सिंह भी स्वीकार करें।",
+      "इमोजी से बॉलीवुड फ़िल्म का नाम पहचानिए।",
+      "रॉकेट सिंह: सेल्समैन ऑफ़ द ईयर",
+      "🚀 👳‍♂️ 💼 🖥️"
+     ]
+    ]
+   },
+   {
+    "name": "Bollywood Actors/Actress",
+    "clues": [
+     [
+      "Guess the actor or actress from their films.",
+      "Shah Rukh Khan",
+      "Dilwale Dulhania Le Jayenge + Chak De! India + Ra.One.\nदिलवाले दुल्हनिया ले जाएँगे + चक दे! इंडिया + रा.वन।",
+      "इन फ़िल्मों के संकेतों से अभिनेता या अभिनेत्री का नाम पहचानिए।",
+      "शाहरुख़ ख़ान",
+      "🚂👰❤️  •  🏑👩🏆  •  🤖💙"
+     ],
+     [
+      "Guess the actor or actress from their films.",
+      "Deepika Padukone",
+      "Chennai Express + Padmaavat + Piku.\nचेन्नई एक्सप्रेस + पद्मावत + पीकू।",
+      "इन फ़िल्मों के संकेतों से अभिनेता या अभिनेत्री का नाम पहचानिए।",
+      "दीपिका पादुकोण",
+      "🚂🌴  •  👑🔥🏰  •  👩🚗👴"
+     ],
+     [
+      "Guess the actor or actress from their films.",
+      "Hrithik Roshan",
+      "Krrish + Koi... Mil Gaya + Kaabil.\nकृष + कोई... मिल गया + काबिल।",
+      "इन फ़िल्मों के संकेतों से अभिनेता या अभिनेत्री का नाम पहचानिए।",
+      "ऋतिक रोशन",
+      "🦸‍♂️🖤  •  👽🤝👦  •  👨‍🦯❤️👩‍🦯"
+     ],
+     [
+      "Guess the actor or actress from their films.",
+      "Vidya Balan",
+      "Kahaani + Mission Mangal + Shakuntala Devi.\nकहानी + मिशन मंगल + शकुंतला देवी।",
+      "इन फ़िल्मों के संकेतों से अभिनेता या अभिनेत्री का नाम पहचानिए।",
+      "विद्या बालन",
+      "🤰🔍🚋  •  👩‍🔬🚀  •  👩🧮⚡"
+     ],
+     [
+      "Guess the actor or actress from their films.",
+      "Rajkummar Rao",
+      "Stree + Newton + Trapped.\nस्त्री + न्यूटन + ट्रैप्ड।",
+      "इन फ़िल्मों के संकेतों से अभिनेता या अभिनेत्री का नाम पहचानिए।",
+      "राजकुमार राव",
+      "👻👰  •  🗳️🪖🌲  •  👨🔒🏢"
+     ]
+    ]
+   },
+   {
+    "name": "Bollywood Directors",
+    "clues": [
+     [
+      "Guess the director from these films or signatures.",
+      "Rohit Shetty",
+      "Exploding cars + Singham + Chennai Express.\nउड़ती-टकराती कारें + सिंघम + चेन्नई एक्सप्रेस।",
+      "इन फ़िल्मों या पहचान से निर्देशक का नाम बताइए।",
+      "रोहित शेट्टी",
+      "🚗💥🚓  •  🦁👮  •  🚂🌴"
+     ],
+     [
+      "Guess the director from these films or signatures.",
+      "Rajkumar Hirani",
+      "Munna Bhai M.B.B.S. + 3 Idiots + PK.\nमुन्ना भाई एम.बी.बी.एस. + 3 इडियट्स + पीके।",
+      "इन फ़िल्मों या पहचान से निर्देशक का नाम बताइए।",
+      "राजकुमार हिरानी",
+      "🏥🤗  •  3️⃣🎓  •  👽📻"
+     ],
+     [
+      "Guess the director from these films or signatures.",
+      "Sanjay Leela Bhansali",
+      "Devdas + Black + Gangubai Kathiawadi.\nदेवदास + ब्लैक + गंगूबाई काठियावाड़ी।",
+      "इन फ़िल्मों या पहचान से निर्देशक का नाम बताइए।",
+      "संजय लीला भंसाली",
+      "🍷💔💃  •  👧🦯🤟  •  👩🤍🌹"
+     ],
+     [
+      "Guess the director from these films or signatures.",
+      "Farah Khan",
+      "Main Hoon Na + Om Shanti Om + Happy New Year.\nमैं हूँ ना + ओम शांति ओम + हैप्पी न्यू ईयर।",
+      "इन फ़िल्मों या पहचान से निर्देशक का नाम बताइए।",
+      "फ़राह ख़ान",
+      "🏫💣🪖  •  🕉️☮️🕉️  •  💃🏆💎"
+     ],
+     [
+      "Guess the director from these films or signatures.",
+      "Zoya Akhtar",
+      "Zindagi Na Milegi Dobara + Dil Dhadakne Do + Gully Boy.\nज़िंदगी ना मिलेगी दोबारा + दिल धड़कने दो + गली बॉय।",
+      "इन फ़िल्मों या पहचान से निर्देशक का नाम बताइए।",
+      "ज़ोया अख़्तर",
+      "🚗🇪🇸🪂  •  🚢👨‍👩‍👧‍👦  •  🎤🏙️"
+     ]
+    ]
+   },
+   {
+    "name": "Bollywood Songs / Music",
+    "clues": [
+     [
+      "Guess the Bollywood song title.",
+      "Yeh Kaali Kaali Aankhen",
+      "Eyes + black + black: the song from Baazigar.\nआँखें और दो बार काला—बाज़ीगर का गीत।",
+      "इमोजी से बॉलीवुड गीत का नाम पहचानिए।",
+      "ये काली काली आँखें",
+      "👀 ⚫ ⚫"
+     ],
+     [
+      "Guess the Bollywood song title.",
+      "Chaiyya Chaiyya",
+      "The famous dance on top of a moving train in Dil Se...\nदिल से.. में चलती ट्रेन की छत पर किया गया प्रसिद्ध नृत्य।",
+      "इमोजी से बॉलीवुड गीत का नाम पहचानिए।",
+      "छैयाँ छैयाँ",
+      "🚂 🔝 💃 🕺 🏔️"
+     ],
+     [
+      "Guess the Bollywood song title.",
+      "Tip Tip Barsa Paani",
+      "Dripping water + rain + the iconic yellow outfit in Mohra.\nपानी की बूँदें, बारिश और मोहरा की प्रसिद्ध पीली पोशाक।",
+      "इमोजी से बॉलीवुड गीत का नाम पहचानिए।",
+      "टिप टिप बरसा पानी",
+      "💧💧 🌧️ 💃 🟨"
+     ],
+     [
+      "Guess the Bollywood song title.",
+      "Mera Joota Hai Japani",
+      "Japanese shoes, English trousers, a Russian cap, and an Indian heart; from Shree 420.\nजापानी जूते, अंग्रेज़ी पतलून, रूसी टोपी और हिंदुस्तानी दिल—श्री 420 का गीत।",
+      "इमोजी से बॉलीवुड गीत का नाम पहचानिए।",
+      "मेरा जूता है जापानी",
+      "👟🇯🇵  👖🇬🇧  🎩🇷🇺  ❤️🇮🇳"
+     ],
+     [
+      "Guess the Bollywood song title.",
+      "Musafir Hoon Yaaron",
+      "A wandering traveller without a home or fixed destination; from Parichay.\nबिना घर और तय ठिकाने वाला मुसाफ़िर—परिचय का गीत।",
+      "इमोजी से बॉलीवुड गीत का नाम पहचानिए।",
+      "मुसाफ़िर हूँ यारों",
+      "🧳 🚶‍♂️ 🎶  🚫🏠 🚫📍"
+     ]
+    ]
+   },
+   {
+    "name": "Bollywood Villains",
+    "clues": [
+     [
+      "Guess the villain CHARACTER, not the actor.",
+      "Mogambo — Mr. India",
+      "An invisible hero faces a uniformed villain famous for being pleased. Played by Amrish Puri.\nअदृश्य नायक के सामने वर्दी वाला खलनायक, जो खुश होने के लिए मशहूर है। अभिनेता: अमरीश पुरी।",
+      "अभिनेता नहीं, खलनायक के किरदार का नाम पहचानिए।",
+      "मोगैम्बो — मिस्टर इंडिया",
+      "🫥🦸‍♂️  🆚  🪖😈😊"
+     ],
+     [
+      "Guess the villain CHARACTER, not the actor.",
+      "Gabbar Singh — Sholay",
+      "A dacoit in rocky terrain faces two friends associated with a coin. Played by Amjad Khan.\nपथरीले इलाके का डाकू और सिक्के से जुड़े दो दोस्त। अभिनेता: अमजद ख़ान।",
+      "अभिनेता नहीं, खलनायक के किरदार का नाम पहचानिए।",
+      "गब्बर सिंह — शोले",
+      "🏜️ 🐎 🔫  🆚  👬🪙"
+     ],
+     [
+      "Guess the villain CHARACTER, not the actor.",
+      "Shakaal — Shaan",
+      "A bald mastermind with an island lair, sharks, and button-operated traps. Played by Kulbhushan Kharbanda.\nगंजा सरगना, द्वीप का अड्डा, शार्क और बटन से चलने वाले जाल। अभिनेता: कुलभूषण खरबंदा।",
+      "अभिनेता नहीं, खलनायक के किरदार का नाम पहचानिए।",
+      "शाकाल — शान",
+      "🧑‍🦲 🦈 🏝️ 🔘"
+     ],
+     [
+      "Guess the villain CHARACTER, not the actor.",
+      "Kancha Cheena — Agneepath (2012)",
+      "The muscular bald villain of Mandwa; fire + path points to Agneepath. Played by Sanjay Dutt.\nमांडवा का ताकतवर गंजा खलनायक; आग और रास्ता अग्निपथ की ओर इशारा करते हैं। अभिनेता: संजय दत्त।",
+      "अभिनेता नहीं, खलनायक के किरदार का नाम पहचानिए।",
+      "कांचा चीना — अग्निपथ (2012)",
+      "🧑‍🦲 💪 🏝️  🔥🛤️"
+     ],
+     [
+      "Guess the villain CHARACTER, not the actor.",
+      "Crime Master Gogo — Andaz Apna Apna",
+      "Name rebus: crime + master + go + go; the two goofballs point to Andaz Apna Apna. Played by Shakti Kapoor.\nनाम की पहेली: क्राइम + मास्टर + गो + गो; दो मज़ाकिया दोस्तों वाली फ़िल्म अंदाज़ अपना अपना। अभिनेता: शक्ति कपूर।",
+      "अभिनेता नहीं, खलनायक के किरदार का नाम पहचानिए।",
+      "क्राइम मास्टर गोगो — अंदाज़ अपना अपना",
+      "🦹‍♂️ 👨‍🏫 🚶‍♂️🚶‍♂️  •  🤪🤝🤪"
+     ]
+    ]
+   },
+   {
+    "name": "Bollywood Families",
+    "clues": [
+     [
+      "Guess the film family connecting these clues.",
+      "The Bachchan family",
+      "Amitabh: quiz-show host; Abhishek: Dhoom; Aishwarya: Miss World.\nअमिताभ: क्विज़ शो के मेज़बान; अभिषेक: धूम; ऐश्वर्या: मिस वर्ल्ड।",
+      "इन संकेतों से जुड़ा फ़िल्मी परिवार पहचानिए।",
+      "बच्चन परिवार",
+      "👨‍🦳💰❓  ➕  🏍️💨  ➕  👸🌍"
+     ],
+     [
+      "Guess the film family connecting these clues.",
+      "The Kapoor family — Raj Kapoor’s branch",
+      "Raj Kapoor: Mera Naam Joker; Ranbir: Rockstar; Kareena: Jab We Met. Accept Kapoor.\nराज कपूर: मेरा नाम जोकर; रणबीर: रॉकस्टार; करीना: जब वी मेट। कपूर भी स्वीकार करें।",
+      "इन संकेतों से जुड़ा फ़िल्मी परिवार पहचानिए।",
+      "कपूर परिवार — राज कपूर की शाखा",
+      "🤡🎪  ➕  👨‍🎤🎸  ➕  👩🗣️🚆"
+     ],
+     [
+      "Guess the film family connecting these clues.",
+      "The Deol family",
+      "Dharmendra: Sholay; Sunny: Gadar; Bobby: the mute antagonist in Animal.\nधर्मेंद्र: शोले; सनी: गदर; बॉबी: एनिमल का बोल न सकने वाला खलनायक।",
+      "इन संकेतों से जुड़ा फ़िल्मी परिवार पहचानिए।",
+      "देओल परिवार",
+      "🏍️🪙🤝  ➕  👳‍♂️🚚🇵🇰  ➕  🐾🔇"
+     ],
+     [
+      "Guess the film family connecting these clues.",
+      "The Khan family — Salim, Salman, Arbaaz, and Sohail",
+      "Salim co-wrote Sholay; Salman is Tiger; Salman and Arbaaz appear in Dabangg. Accept Salim Khan’s family.\nसलीम ने शोले का सहलेखन किया; सलमान टाइगर हैं; सलमान और अरबाज़ दबंग में हैं। सलीम ख़ान का परिवार स्वीकार करें।",
+      "इन संकेतों से जुड़ा फ़िल्मी परिवार पहचानिए।",
+      "ख़ान परिवार — सलीम, सलमान, अरबाज़ और सोहेल",
+      "✍️👬🪙🔫  ➕  🐅🕵️  ➕  👮🕶️"
+     ],
+     [
+      "Guess the film family connecting these clues.",
+      "The Akhtar family",
+      "Javed: lyricist; Farhan: Bhaag Milkha Bhaag; Zoya: director of Dil Dhadakne Do.\nजावेद: गीतकार; फ़रहान: भाग मिल्खा भाग; ज़ोया: दिल धड़कने दो की निर्देशक।",
+      "इन संकेतों से जुड़ा फ़िल्मी परिवार पहचानिए।",
+      "अख़्तर परिवार",
+      "✍️🎶  ➕  🏃🥛🏅  ➕  🚢👨‍👩‍👧‍👦"
+     ]
+    ]
+   }
+  ]
+ }
+];
+
+const $=id=>document.getElementById(id);
+const STORAGE_KEY='family-jeopardy-v1';
+const clone=value=>JSON.parse(JSON.stringify(value));
+const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initialState=()=>({game:0,selected:0,teams:Array.from({length:4},(_,i)=>({name:`Team ${i+1}`,score:0})),played:{}});
+let state=initialState(),history=[],storageAvailable=true,active=null,interval=null,toastTimeout=null;
+try{
+ const raw=localStorage.getItem(STORAGE_KEY);
+ if(raw){
+  const saved=JSON.parse(raw);
+  if(Array.isArray(saved.teams)&&saved.teams.length>=1&&saved.teams.length<=8&&saved.teams.every(t=>typeof t.name==='string'&&t.name.trim()&&t.name.length<=28&&Number.isSafeInteger(t.score)&&Math.abs(t.score)<=10000000)){
+   state.teams=saved.teams;
+   state.game=Number.isInteger(saved.game)&&saved.game>=0&&saved.game<GAMES.length?saved.game:0;
+   state.selected=Number.isInteger(saved.selected)&&saved.selected>=0&&saved.selected<state.teams.length?saved.selected:0;
+   if(saved.played&&typeof saved.played==='object')for(const key of Object.keys(saved.played)){const [g,c,r]=key.split('-').map(Number);if(key===`${g}-${c}-${r}`&&GAMES[g]?.categories[c]?.clues[r]&&saved.played[key]===true)state.played[key]=true;}
+  }
+ }
+}catch{storageAvailable=false;}
+
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));storageAvailable=true;}catch{storageAvailable=false;}$('saveStatus').textContent=storageAvailable?'Progress saves automatically in this browser.':'Browser storage unavailable. Keep this page open to preserve progress.';}
+function remember(){history.push(clone(state));if(history.length>50)history.shift();}
+function notify(message){$('toast').textContent=message;clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').textContent='',3500);}
+function render(){
+ const game=GAMES[state.game],count=Object.keys(state.played).filter(k=>k.startsWith(state.game+'-')).length;
+ $('gameTitle').textContent=game.title;$('gameEyebrow').textContent=game.eyebrow;$('gameSubtitle').textContent=game.subtitle;
+ $('progressCaption').textContent=`${count} of 30 played`;$('progressFill').style.width=(count/30*100)+'%';
+ $('gameTabs').innerHTML=GAMES.map((g,i)=>`<button class="game-tab ${i===state.game?'active':''}" data-game="${i}" aria-pressed="${i===state.game}"><span class="game-num">0${i+1}</span>${esc(g.title)}</button>`).join('');
+ let board=game.categories.map(c=>`<div class="category">${esc(c.name)}</div>`).join('');
+ for(let row=0;row<5;row++)for(let cat=0;cat<6;cat++){
+  const used=state.played[`${state.game}-${cat}-${row}`];
+  board+=`<button class="clue ${used?'played':''}" data-cat="${cat}" data-row="${row}" ${used?'disabled':''} aria-label="${esc(game.categories[cat].name)}, ${(row+1)*100} points${used?', played':''}">${used?'✓':(row+1)*100}</button>`;
+ }
+ $('board').innerHTML=board;
+ $('scoreboard').style.setProperty('--team-count',state.teams.length);
+ $('scoreboard').innerHTML=state.teams.map((t,i)=>`<button class="team ${i===state.selected?'active':''}" data-team="${i}" aria-pressed="${i===state.selected}" aria-label="${esc(t.name)}, ${t.score} points"><span class="team-name">${esc(t.name)}</span><span class="team-score">${t.score.toLocaleString()}</span></button>`).join('');
+ if(count===30){const best=Math.max(...state.teams.map(t=>t.score));const leaders=state.teams.filter(t=>t.score===best);$('boardMessage').textContent=leaders.length===1?`Board complete! Overall leader: ${leaders[0].name}`:'Board complete! The overall lead is tied.';}
+ else $('boardMessage').textContent='Pick a team below, then choose a clue.';
+ $('undoBtn').disabled=!history.length;save();
+}
+function selectTeam(index){if(!Number.isInteger(index)||!state.teams[index])return;state.selected=index;render();if(active)renderQuestionTeams();$(active?'questionTeams':'scoreboard').querySelector(`[data-team="${index}"]`).focus();}
+function renderQuestionTeams(){
+ $('questionTeams').innerHTML=state.teams.map((t,i)=>`<button class="pick-team ${i===state.selected?'active':''}" data-team="${i}" aria-pressed="${i===state.selected}">${esc(t.name)}</button>`).join('');
+ $('awardBtn').textContent=`+${active.points} to ${state.teams[state.selected].name}`;
+}
+function remaining(){return active?(active.running?Math.max(0,active.deadline-performance.now()):active.remaining):0;}
+function updateTimer(){
+ if(!active)return;
+ const ms=remaining(),seconds=Math.ceil(ms/1000);
+ $('timer').textContent=`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
+ $('timer').classList.toggle('low',seconds<=15);
+ $('timeFill').style.width=(ms/90000*100)+'%';$('timeFill').style.background=seconds<=15?'var(--red)':'var(--gold)';
+ if(seconds<=30&&!active.warned30){active.warned30=true;$('announcer').textContent='30 seconds remaining.';}
+ if(seconds<=10&&!active.warned10){active.warned10=true;$('announcer').textContent='10 seconds remaining.';}
+ if(ms<=0&&active.running){active.running=false;active.remaining=0;$('pauseBtn').textContent='Time’s up';$('pauseBtn').disabled=true;$('questionHelper').textContent='Time’s up! Host: reveal the answer when everyone is ready.';$('announcer').textContent='Time is up. The host can reveal the answer.';}
+}
+function openQuestion(cat,row){
+ const key=`${state.game}-${cat}-${row}`;if(state.played[key]||active)return;
+ const category=GAMES[state.game].categories[cat],clue=category.clues[row];
+ active={key,cat,row,points:(row+1)*100,revealed:false,remaining:90000,deadline:performance.now()+90000,running:true,warned30:false,warned10:false};
+ $('questionMeta').textContent=`${category.name} · ${active.points} points`;$('questionText').textContent=clue[0];$('questionText').style.whiteSpace='pre-line';$('questionHindi').textContent=clue[3];$('questionEmoji').textContent=clue[5]||'';$('questionEmoji').hidden=!clue[5];
+ $('answerText').textContent=clue[1];$('answerHindi').textContent=clue[4];$('answerNote').textContent=clue[2]||'';$('answerNote').hidden=!clue[2];
+ $('answerBox').hidden=true;$('revealBtn').hidden=false;$('awardBtn').hidden=true;$('noWinnerBtn').hidden=true;$('laterBtn').hidden=false;
+ $('questionHelper').textContent='Talk it over with your team. Answers in Hindi or English are welcome.';$('pauseBtn').disabled=false;$('pauseBtn').textContent='Pause';$('restartBtn').disabled=false;
+ renderQuestionTeams();updateTimer();$('questionDialog').showModal();$('revealBtn').focus();clearInterval(interval);interval=setInterval(updateTimer,100);
+}
+function pauseTimer(){if(!active||active.revealed||remaining()<=0)return;if(active.running){active.remaining=remaining();active.running=false;$('pauseBtn').textContent='Resume';$('questionHelper').textContent='Timer paused. Ready when you are.';}else{active.deadline=performance.now()+active.remaining;active.running=true;$('pauseBtn').textContent='Pause';$('questionHelper').textContent='Talk it over with your team. Answers in Hindi or English are welcome.';}updateTimer();}
+function restartTimer(){if(!active||active.revealed)return;active.remaining=90000;active.deadline=performance.now()+90000;active.running=true;active.warned30=false;active.warned10=false;$('pauseBtn').disabled=false;$('pauseBtn').textContent='Pause';$('questionHelper').textContent='Fresh start. You have 90 seconds.';updateTimer();}
+function reveal(){if(!active||active.revealed)return;active.remaining=remaining();active.running=false;active.revealed=true;clearInterval(interval);$('answerBox').hidden=false;$('revealBtn').hidden=true;$('awardBtn').hidden=false;$('noWinnerBtn').hidden=false;$('laterBtn').hidden=true;$('pauseBtn').disabled=true;$('restartBtn').disabled=true;$('pauseBtn').textContent='Stopped';$('questionHelper').textContent='Host decides: accept equivalent answers and give credit generously.';$('awardBtn').focus();}
+function closeQuestion(award=false,forcePlayed=false){
+ if(!active)return;
+ const key=active.key,points=active.points,team=state.teams[state.selected],played=forcePlayed||active.revealed;
+ if(played){remember();state.played[key]=true;if(award)team.score+=points;}
+ clearInterval(interval);active=null;$('questionDialog').close();render();
+ if(award)notify(`+${points} points for ${team.name}!`);
+ const parts=key.split('-');const tile=$('board').querySelector(`[data-cat="${parts[1]}"][data-row="${parts[2]}"]`);if(tile&&!tile.disabled)tile.focus();else $('gameTabs').querySelector('.active').focus();
+}
+function undo(){if(!history.length||active)return;state=history.pop();render();notify('Last action undone.');}
+
+let draftTeams=[];
+function renderRoster(){
+ $('roster').innerHTML=draftTeams.map((t,i)=>`<div class="roster-row"><input aria-label="Team ${i+1} name" data-name="${i}" maxlength="28" required value="${esc(t.name)}"><input aria-label="Team ${i+1} points" data-score="${i}" type="number" step="1" min="-1000000" max="1000000" required value="${t.score}"><button class="remove-team" type="button" data-remove="${i}" ${draftTeams.length===1?'disabled':''} aria-label="Remove team ${i+1}">×</button></div>`).join('');
+ $('addTeamBtn').disabled=draftTeams.length>=8;
+}
+function openTeams(){draftTeams=clone(state.teams);$('teamsError').textContent='';renderRoster();$('teamsDialog').showModal();}
+function saveTeams(event){
+ event.preventDefault();const names=draftTeams.map(t=>t.name.trim());
+ if(names.some(n=>!n)||new Set(names.map(n=>n.toLowerCase())).size!==names.length){$('teamsError').textContent='Give every team a different, nonempty name.';return;}
+ if(draftTeams.some(t=>!Number.isSafeInteger(t.score)||Math.abs(t.score)>1000000)){$('teamsError').textContent='Scores must be whole numbers between −1,000,000 and 1,000,000.';return;}
+ remember();state.teams=draftTeams.map((t,i)=>({name:names[i],score:t.score}));state.selected=Math.min(state.selected,state.teams.length-1);$('teamsDialog').close();render();notify('Teams saved.');
+}
+async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else notify('Use your browser’s fullscreen command.');}catch{notify('Use your browser’s fullscreen command.');}}
+
+$('gameTabs').addEventListener('click',event=>{const b=event.target.closest('[data-game]');if(b){state.game=Number(b.dataset.game);render();$('gameTabs').querySelector('.active').focus();}});
+$('board').addEventListener('click',event=>{const b=event.target.closest('[data-cat]');if(b&&!b.disabled)openQuestion(Number(b.dataset.cat),Number(b.dataset.row));});
+for(const id of ['scoreboard','questionTeams'])$(id).addEventListener('click',event=>{const b=event.target.closest('[data-team]');if(b)selectTeam(Number(b.dataset.team));});
+$('pauseBtn').addEventListener('click',pauseTimer);$('restartBtn').addEventListener('click',restartTimer);$('revealBtn').addEventListener('click',reveal);
+$('awardBtn').addEventListener('click',()=>closeQuestion(true,true));$('noWinnerBtn').addEventListener('click',()=>closeQuestion(false,true));$('laterBtn').addEventListener('click',()=>closeQuestion());$('closeQuestionBtn').addEventListener('click',()=>closeQuestion());
+$('questionDialog').addEventListener('cancel',event=>{event.preventDefault();closeQuestion();});
+$('helpBtn').addEventListener('click',()=>$('helpDialog').showModal());$('teamsBtn').addEventListener('click',openTeams);$('fullscreenBtn').addEventListener('click',toggleFullscreen);$('undoBtn').addEventListener('click',undo);
+document.addEventListener('fullscreenchange',()=>{$('fullscreenBtn').textContent=document.fullscreenElement?'⛶ Exit fullscreen':'⛶ Fullscreen';});
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
+$('resetBtn').addEventListener('click',()=>$('resetDialog').showModal());$('confirmResetBtn').addEventListener('click',()=>{remember();state.played={};state.teams.forEach(t=>t.score=0);state.game=0;state.selected=0;$('resetDialog').close();render();notify('A fresh board. Let the games begin!');});
+$('teamsForm').addEventListener('submit',saveTeams);
+$('roster').addEventListener('input',event=>{const el=event.target;if(el.dataset.name!==undefined)draftTeams[Number(el.dataset.name)].name=el.value;if(el.dataset.score!==undefined)draftTeams[Number(el.dataset.score)].score=el.value===''?NaN:Number(el.value);});
+$('roster').addEventListener('click',event=>{const b=event.target.closest('[data-remove]');if(b&&draftTeams.length>1){draftTeams.splice(Number(b.dataset.remove),1);renderRoster();}});
+$('addTeamBtn').addEventListener('click',()=>{if(draftTeams.length<8){let n=draftTeams.length+1;while(draftTeams.some(t=>t.name===`Team ${n}`))n++;draftTeams.push({name:`Team ${n}`,score:0});renderRoster();$('roster').lastElementChild.querySelector('input').focus();}});
+document.addEventListener('keydown',event=>{
+ if(event.target.matches('input,textarea,select,[contenteditable="true"]')||event.ctrlKey||event.metaKey||event.altKey||event.repeat)return;
+ if(active){if(event.code==='Space'){event.preventDefault();pauseTimer();}if(event.key.toLowerCase()==='r'){event.preventDefault();reveal();}return;}
+ if(document.querySelector('dialog[open]'))return;
+ if(event.key.toLowerCase()==='f'){event.preventDefault();toggleFullscreen();}if(event.key==='?'){$('helpDialog').showModal();}
+});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active)updateTimer();});
+render();
+</script>
+</body>
+</html>
