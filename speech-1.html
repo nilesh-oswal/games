@@ -1,0 +1,485 @@
+<title>Page One Speech Coach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a marked-up rehearsal script — ink on cool paper, highlighter marks for cues, one centered column with a tool bar on top */
+:root{
+  --paper:#eef1f5; --sheet:#ffffff; --ink:#1b2433; --ink-soft:#5a6578; --rule:#d5dbe4;
+  --mark:#ffe14d; --mark-ink:#3d3200; --accent:#2f5bd8; --accent-soft:#e3eafc;
+  --good:#1f8a4c; --warn:#c77700; --bad:#c43a3a;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11151c; --sheet:#1a2029; --ink:#e7ebf2; --ink-soft:#9aa5b8; --rule:#2c3440;
+  --mark:#e9c935; --mark-ink:#241d00; --accent:#7b9cff; --accent-soft:#232d47;
+  --good:#4cc37f; --warn:#f0a43a; --bad:#ef6b6b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151c; --sheet:#1a2029; --ink:#e7ebf2; --ink-soft:#9aa5b8; --rule:#2c3440;
+  --mark:#e9c935; --mark-ink:#241d00; --accent:#7b9cff; --accent-soft:#232d47;
+  --good:#4cc37f; --warn:#f0a43a; --bad:#ef6b6b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding-block:20px 60px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.eyebrow{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+h1 .hl{background:linear-gradient(transparent 55%, var(--mark) 55%);color:inherit;padding:0 .1em}
+.sub{color:var(--ink-soft);margin:0;font-size:15px}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;display:flex;gap:6px;
+  background:var(--paper);padding-block:10px;border-bottom:1px solid var(--rule);margin-bottom:18px;flex-wrap:wrap}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--paper)}
+.tab{font-family:var(--f-display);font-weight:700;font-size:15px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);
+  padding:8px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+button:focus-visible,.tab:focus-visible,input:focus-visible+label,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.panel{display:flex;flex-direction:column;gap:16px}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;font-family:var(--f-display);font-size:14px;color:var(--ink-soft)}
+.switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.switch input{width:18px;height:18px;accent-color:var(--accent)}
+.stats{font-family:var(--f-mono);font-size:13px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap}
+.stats b{color:var(--ink)}
+
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:22px clamp(16px,4vw,32px)}
+.sec{display:flex;flex-direction:column;gap:12px;padding-block:18px;border-top:1px dashed var(--rule)}
+.sec:first-child{border-top:0;padding-top:0}
+.sec-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.beatno{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:4px}
+.sec-head h2{font-family:var(--f-display);font-size:20px;margin:0;font-weight:700}
+.sec-head .t{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-left:auto}
+.cue{font-family:var(--f-display);font-size:14px;color:var(--ink-soft);margin:0}
+.p{margin:0;max-width:65ch}
+.p.opt{border-left:3px solid var(--mark);padding-left:12px}
+.p.opt::before{content:"OPTIONAL · cut if long";display:block;font-family:var(--f-display);font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--warn);margin-bottom:2px}
+.pause{display:inline-block;font-family:var(--f-display);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--mark);color:var(--mark-ink);padding:1px 7px;border-radius:3px;margin:0 2px;vertical-align:2px}
+.p.hidden-words{cursor:pointer;color:var(--ink-soft);font-family:var(--f-mono);font-size:14px;letter-spacing:.02em}
+.p.hidden-words:hover{color:var(--ink)}
+.subhead{font-family:var(--f-display);font-weight:700;font-size:15px;margin:4px 0 0;color:var(--ink)}
+
+/* Beats */
+.beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.beat{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px;text-align:left;cursor:pointer;color:var(--ink);font:inherit;min-width:0}
+.beat .beatno{align-self:flex-start}
+.beat h3{font-family:var(--f-display);font-size:18px;margin:0}
+.beat .keys{margin:0;color:var(--ink-soft);font-size:14.5px}
+.beat.covered .keys{filter:blur(6px);user-select:none}
+.beat.covered::after{content:"Tap to reveal";font-family:var(--f-display);font-size:12px;color:var(--accent);font-weight:700}
+.btn{font-family:var(--f-display);font-weight:700;font-size:15px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:9px 16px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.quiz{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.quiz .q{font-family:var(--f-display);font-size:20px;font-weight:700;margin:0;text-wrap:balance}
+.quiz .a{margin:0;padding:12px;background:var(--accent-soft);border-radius:8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* Practice */
+.timer-card{background:var(--ink);color:var(--sheet);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.clock{font-family:var(--f-mono);font-weight:700;font-size:clamp(56px,16vw,96px);line-height:1;font-variant-numeric:tabular-nums}
+.clock small{font-size:.3em;opacity:.7;margin-left:8px}
+.now{display:flex;flex-direction:column;gap:4px}
+.now .lbl{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.now .name{font-family:var(--f-display);font-size:22px;font-weight:800}
+.now .cue2{font-size:15px;opacity:.85}
+.progress{height:8px;background:color-mix(in srgb, var(--sheet) 20%, transparent);border-radius:99px;overflow:hidden;position:relative}
+.progress i{position:absolute;inset:0 auto 0 0;background:var(--mark);width:0}
+.timer-card .btn{background:transparent;color:var(--sheet);border-color:color-mix(in srgb, var(--sheet) 40%, transparent)}
+.timer-card .btn.primary{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.pace{font-family:var(--f-display);font-weight:700;font-size:15px;padding:8px 12px;border-radius:8px;background:color-mix(in srgb, var(--sheet) 12%, transparent)}
+.splits{width:100%;border-collapse:collapse;font-size:14.5px}
+.splits th,.splits td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:left}
+.splits th{font-family:var(--f-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.splits td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.splits tr.current td{background:var(--accent-soft)}
+.tag{font-family:var(--f-display);font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.tag.good{color:var(--good);border:1px solid var(--good)}
+.tag.fast{color:var(--warn);border:1px solid var(--warn)}
+.tag.slow{color:var(--bad);border:1px solid var(--bad)}
+.tablebox{overflow-x:auto}
+.tips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.note{font-size:14px;color:var(--ink-soft);margin:0}
+.history{font-family:var(--f-mono);font-size:13px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+@media (prefers-reduced-motion:no-preference){.progress i{transition:width .4s linear}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Original Oratory · Rehearsal kit</span>
+    <h1>Don't Stop at <span class="hl">Page One</span></h1>
+    <p class="sub">Read it, memorize the six beats, then run it against the clock.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-script" aria-selected="true" data-tab="script">Script</button>
+    <button class="tab" role="tab" id="tab-beats" aria-selected="false" data-tab="beats">Memorize</button>
+    <button class="tab" role="tab" id="tab-practice" aria-selected="false" data-tab="practice">Practice timer</button>
+  </nav>
+
+  <!-- SCRIPT -->
+  <section class="panel" id="panel-script">
+    <div class="bar">
+      <label class="switch"><input type="checkbox" id="opt-toggle" checked> Show optional parts</label>
+      <label class="switch"><input type="checkbox" id="letters-toggle"> First-letter mode</label>
+    </div>
+    <div class="stats" id="stats"></div>
+    <p class="note" id="letters-note" hidden>First-letter mode shows only the first letter of each word. Say the full sentence out loud, then tap a paragraph to check yourself.</p>
+    <div class="sheet" id="script"></div>
+  </section>
+
+  <!-- BEATS -->
+  <section class="panel" id="panel-beats" hidden>
+    <p class="note">These six beats are the whole speech. Tap a card to hide or show its details, then try to say each beat from the title alone.</p>
+    <div class="row">
+      <button class="btn" id="cover-all">Hide all details</button>
+      <button class="btn" id="show-all">Show all</button>
+    </div>
+    <div class="beats" id="beats"></div>
+
+    <div class="quiz">
+      <span class="eyebrow">What comes next?</span>
+      <p class="q" id="quiz-q"></p>
+      <p class="a" id="quiz-a" hidden></p>
+      <div class="row">
+        <button class="btn primary" id="quiz-reveal">Reveal</button>
+        <button class="btn" id="quiz-next">Next question</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section class="panel" id="panel-practice" hidden>
+    <div class="bar">
+      <label for="target">Time limit</label>
+      <select id="target" class="btn">
+        <option value="480">8:00</option>
+        <option value="600" selected>10:00</option>
+        <option value="720">12:00</option>
+      </select>
+      <label class="switch"><input type="checkbox" id="opt-practice" checked> Include optional parts</label>
+    </div>
+
+    <div class="timer-card">
+      <div class="clock" id="clock">0:00<small id="clock-of">/ 10:00</small></div>
+      <div class="progress"><i id="prog"></i></div>
+      <div class="now">
+        <span class="lbl" id="now-lbl">Up first</span>
+        <span class="name" id="now-name"></span>
+        <span class="cue2" id="now-cue"></span>
+      </div>
+      <div class="pace" id="pace">Press Start, then tap "Next section" each time you move on.</div>
+      <div class="row">
+        <button class="btn primary" id="start">Start</button>
+        <button class="btn" id="next" disabled>Next section</button>
+        <button class="btn" id="reset">Reset</button>
+      </div>
+    </div>
+
+    <div class="tablebox">
+      <table class="splits">
+        <thead><tr><th>Section</th><th>Target</th><th>You</th><th></th></tr></thead>
+        <tbody id="splits"></tbody>
+      </table>
+    </div>
+    <p class="note">Targets are based on how many words each section has, so they shift when you include or drop the optional parts.</p>
+
+    <div class="sheet">
+      <p class="subhead">Past runs</p>
+      <div class="history" id="history"></div>
+    </div>
+
+    <div class="sheet">
+      <p class="subhead">If you talk fast</p>
+      <ul class="tips">
+        <li>A yellow <span class="pause">pause</span> mark in the script means a full two-second stop. Count it in your head.</li>
+        <li>If a section shows <span class="tag fast">Too fast</span>, run just that section again and slow the stories down, not the facts.</li>
+        <li>If you blank, say "page one." Every section ties back to it.</li>
+        <li>Skipped a point? Keep going. Nobody in the audience knows the script.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+const SECTIONS = [
+ { id:"open", name:"Opening story + thesis", cue:"Maya at the lunch table → stuck-up → candy cell → terrified → best friend",
+   keys:"Lunch table, no smile, “stuck-up,” told friends, 2 months. Candy cell project. Moved from another state. Terrified, not stuck-up. Funniest person. Thesis: why we do it, what it costs, how to keep reading.",
+   paras:[
+  {t:"Everyone in this room has heard the saying “Don't judge a book by its cover.” We hear it from parents, teachers, and posters in the hallway. And I'd bet everyone in this room has done it anyway. I know I have."},
+  {t:"On the first day of seventh grade, a new girl named Maya sat down at the end of my lunch table. She didn't smile. She didn't say hi. She just looked down at her tray. When I asked her a question, she gave me a one-word answer and went back to eating."},
+  {t:"So I decided, right there, in about five seconds, that Maya was stuck-up. She thought she was too good for us. I told my friends. They agreed. And for two whole months, I barely said a word to her."},
+  {t:"Then our science teacher put us in the same group for a project. We had to build a model of a cell out of candy. Somewhere between the gummy worms and the jelly beans, Maya started talking."},
+  {t:"And I found out that she had just moved here from another state. She had left behind her friends, her school, her whole life. She didn't know a single person here. She wasn't stuck-up. [pause] She was terrified."},
+  {t:"And once she got comfortable, she turned out to be one of the funniest people I have ever met. She does impressions of teachers that could make anyone laugh."},
+  {t:"Maya is now one of my best friends. But I still think about those two months. I had read one page of her story and decided I knew the whole book. [pause]"},
+  {t:"Today I want to talk about what happens when we stop at page one. First, why we do it. Second, what it costs us. And third, how we can learn to keep reading."}
+ ]},
+ { id:"why", name:"Why we judge so fast", cue:"Busy brain → a tenth of a second → dog vs. people → page one comes from what we hear",
+   keys:"Busy brain takes shortcuts. Princeton: first impression in a tenth of a second. Growling dog = useful shortcut. People = hundreds of pages. Page one also comes from movies, news, rumors, one rude kid.",
+   paras:[
+  {t:"So first, why do we judge people so fast?"},
+  {t:"The honest answer is that our brains are busy. Every single day we see hundreds of faces, hear thousands of words, and make decisions constantly. Our brains can't slowly think through every one. So they take shortcuts."},
+  {t:"Researchers at Princeton found that people form a first impression of someone's face in about a tenth of a second. That's faster than a blink. Before you even know someone's name, your brain has already decided whether they seem friendly, smart, or trustworthy."},
+  {t:"Now, sometimes those shortcuts are helpful. If a dog is growling and showing its teeth, you don't need to get to know the dog. You don't need to ask about its childhood. You just back away. That shortcut keeps you safe."},
+  {t:"But with people, the shortcut becomes a trap. A person isn't a growling dog. A person is a story with hundreds of pages: their family, their fears, their talents, their bad days, their dreams. And our brain wants to close the book after one."},
+  {t:"And here's the part we don't always notice. Page one doesn't come only from what we see. It also comes from what we've heard."},
+  {t:"Think about it. Movies that always make a certain kind of person the villain. TV shows where the nerd is always awkward, the popular girl is always mean, and the athlete is never smart. A news story we saw once. A rumor in the hallway. Or one rude kid from another school, so now we think everyone from that school is rude."},
+  {t:"Even something as small as a name can trigger it. We hear a name and picture a person before we've met them. We see someone's clothes, their shoes, the way they talk, and our brain fills in the rest of the story without asking permission.", opt:true},
+  {t:"So before we ever meet someone, someone else may have already written their first page for us. And most of the time, we don't even realize we're reading it."}
+ ]},
+ { id:"cost", name:"Three costs", cue:"Unfair to them → a loss for us → it spreads",
+   keys:"1) Unfair to them: jock who writes poetry, “the smart one,” class clown, me as “the quiet one.” We shrink people. 2) Loss for us: two months with Maya, Mr. Thompson the saxophone player. 3) It spreads: telephone, my friends believed me, whole countries.",
+   paras:[
+  {t:"Now you might be thinking: so what? Everyone judges a little. It's human. Why does it matter?"},
+  {t:"It matters because stopping at page one costs us in three big ways. It's unfair to them, it's a loss for us, and it spreads."},
+  {h:"First, it's unfair to them."},
+  {t:"When we decide who someone is, they get stuck inside the story we wrote. And it's really hard to get out."},
+  {t:"Think about the football player who secretly loves writing poetry. He never shares it, because everyone has already decided he's “just a jock.” Or the girl everyone calls “the smart one.” She's afraid to ask for help when she's struggling, because the smart one isn't supposed to struggle. Or the kid who's labeled “the class clown.” Even when he's serious, even when he's hurting, people just wait for the joke."},
+  {t:"I know what that feels like. In elementary school, I was “the quiet one.” And once that was my label, people stopped asking what I thought. Teachers didn't call on me. Kids didn't invite me to speak up in groups. Everyone assumed I had nothing to say."},
+  {t:"But I wasn't quiet because I had nothing to say. I was quiet because nobody expected me to say anything. And honestly, that's part of why I'm standing up here today. I wanted to prove that page one wasn't my whole story."},
+  {t:"When we judge people too fast, we don't just misunderstand them. We can actually shrink them. [pause] We make them smaller than they really are."},
+  {h:"Second, it's a loss for us."},
+  {t:"Think about Maya again. I lost two months of friendship with someone who makes me laugh every single day. Two months of inside jokes, sleepovers, and conversations that I'll never get back, all because of one page."},
+  {t:"Or think about my neighbor, Mr. Thompson. When I was little, I thought he was the grumpiest man alive. He never smiled, and he yelled at kids who stepped on his lawn. I was a little scared of him. Then one day my mom made me bring him cookies, and he invited us in. His living room was full of old photos. It turned out he used to play the saxophone in a jazz band and had traveled all over the world. He wasn't grumpy. He was lonely. His wife had passed away, and he didn't have many people to talk to. He ended up teaching me more about music than any class ever has.", opt:true},
+  {t:"Now think about how many people you've closed the book on. The kid in your math class you think is weird. The new student who dresses differently. The older person in your neighborhood. Some of them might have become your best friend, your teammate, your mentor, or the person who helps you through your worst day. You'll never know, because you stopped reading."},
+  {h:"Third, it spreads."},
+  {t:"One person's page one doesn't stay with one person. It's like the game of telephone. One kid says, “The new girl is kind of weird.” Someone else repeats it. By lunch, the whole grade agrees, and not one of them has actually talked to her."},
+  {t:"That's exactly what happened with Maya. I didn't just decide she was stuck-up. I told my friends, and they believed me. My page one became their page one. If that science project had never happened, Maya might have spent all of seventh grade alone because of something I said in five seconds."},
+  {t:"And it doesn't just happen in schools. It happens to whole neighborhoods, whole religions, whole countries. One headline, one bad experience, or one joke repeated enough times, and suddenly millions of people are judged by a story that was never really theirs."}
+ ]},
+ { id:"counter", name:"“But sometimes first impressions are right”", cue:"True, but never the whole story → a question, not a conclusion",
+   keys:"Sometimes page one is right. But it's never the whole story: worst day, changed, second chance. Trust feelings of danger. A first impression is a question, not a conclusion.",
+   paras:[
+  {t:"Now, some people might say, “But sometimes first impressions are right.” And that's true. Sometimes they are."},
+  {t:"But here's the thing. Even when page one is right, it's never the whole story. Maybe someone really was rude to you on the first day. But maybe they were having the worst day of their life. Maybe they've changed. Maybe they'd be different if someone gave them a second chance."},
+  {t:"I'm not saying we should ignore our instincts. If something feels unsafe, trust that feeling. I'm saying we shouldn't treat a first impression like a final answer. A first impression should be a question, not a conclusion."}
+ ]},
+ { id:"fix", name:"Ask. Wait. Share.", cue:"Ask one real question → name it “page one” and wait → show your own pages",
+   keys:"Can't turn off the brain, but choose what's next. ASK a real question (curiosity is the opposite of judgment). WAIT: name it “page one.” What else could be true? SHARE your own pages; being real is contagious.",
+   paras:[
+  {t:"So how do we fix this? We can't turn off our brains. That first impression is going to happen, whether we like it or not. But we can choose what we do next."},
+  {t:"I want to leave you with three simple habits: Ask. Wait. Share."},
+  {h:"First, ask."},
+  {t:"Ask one real question. Not just “How are you?” but something real, like “What are you into?” “What's something people don't know about you?” or “What's the best thing that happened to you this week?”"},
+  {t:"Curiosity is the opposite of judgment. You can't assume and wonder at the same time. If I had asked Maya one real question on that first day, I would have learned in five minutes what took me two months."},
+  {h:"Second, wait."},
+  {t:"When you notice yourself making a snap judgment, and you will, just name it in your head: “Okay, that's page one.”"},
+  {t:"You don't have to feel guilty for thinking it. Your brain is just doing its job. But don't let it be the final page. Give the person a chance to show you page two, page three, and page ten."},
+  {t:"One trick that helps me is to ask myself: “What else could be true?” The girl who didn't say hi could be shy. The boy who seems rude could be stressed about something at home. The teacher who seems strict could just really care. There's almost always another explanation if we're willing to look for it.", opt:true},
+  {h:"Third, share."},
+  {t:"Be willing to show people more of your own story. Tell people what you actually care about, even the parts that might surprise them. If you love both soccer and painting, say so. If you're “the smart one” but you're struggling, ask for help."},
+  {t:"When you let people see past your page one, you make it easier for them to do the same for others. Being real is contagious."},
+  {t:"So remember: Ask. Wait. Share."}
+ ]},
+ { id:"close", name:"Closing callback", cue:"“I thought you were stuck-up” → the challenge → “Don't stop at page one”",
+   keys:"Months later, told Maya. She laughed: “I thought YOU were stuck-up.” Both read one page. Challenge: one person this week. Ask, wait, share. Every person is a whole book. Don't stop at page one.",
+   paras:[
+  {t:"A few months after Maya and I became friends, we were sitting in my room, and I finally told her the truth. I said, “Okay, I have to admit something. When I first met you, I thought you were stuck-up.”"},
+  {t:"And she started laughing so hard she couldn't breathe. When she finally calmed down, she said, “That's so funny. I thought *you* were stuck-up.” [pause]"},
+  {t:"We had both read one page and walked away. We were both wrong. And we almost missed each other completely."},
+  {t:"So here's my challenge for you. This week, think of one person you've already closed the book on. Maybe it's someone in your class, your team, or your neighborhood. Ask them one question. Wait before deciding who they are. And share one page of yourself."},
+  {t:"You might be surprised by what you find. I know I was."},
+  {t:"Because every person you meet is a whole book, full of chapters you haven't read yet."},
+  {t:"So please, [pause] don't stop at page one."},
+  {t:"Thank you."}
+ ]}
+];
+
+const QUIZ = [
+ ["What happens right after you say you judged Maya as stuck-up?","You told your friends, they agreed, and you barely spoke to her for two months. Then the candy cell project."],
+ ["What's the twist in the opening story?","She'd just moved from another state. She wasn't stuck-up. She was terrified."],
+ ["What three questions does the thesis promise to answer?","Why we do it, what it costs us, and how we can keep reading."],
+ ["What's the research fact in “Why we judge”?","Princeton researchers found people form a first impression of a face in about a tenth of a second."],
+ ["Why is the growling dog in the speech?","It shows when a shortcut is useful. People aren't growling dogs; they're stories with hundreds of pages."],
+ ["Where else does page one come from, besides what we see?","What we've heard: movies, TV, the news, rumors, one rude kid from another school."],
+ ["Name the three costs, in order.","It's unfair to them, it's a loss for us, and it spreads."],
+ ["Which three labels show how people get stuck?","The jock who writes poetry, “the smart one,” and the class clown. Then your own: “the quiet one.”"],
+ ["What's the key line at the end of “unfair to them”?","We can actually shrink them. We make them smaller than they really are."],
+ ["What game explains how judgments spread?","Telephone. One kid says the new girl is weird, and by lunch the whole grade agrees."],
+ ["What's the counterargument, and your answer?","“Sometimes first impressions are right.” True, but never the whole story. A first impression is a question, not a conclusion."],
+ ["What are the three habits?","Ask. Wait. Share."],
+ ["What do you say in your head during “Wait”?","“Okay, that's page one.”"],
+ ["What does Maya say in the closing?","“That's so funny. I thought YOU were stuck-up.”"],
+ ["What's the challenge to the audience?","Think of one person you've closed the book on this week. Ask one question, wait before deciding, share one page of yourself."],
+ ["What's the very last line?","So please, don't stop at page one."]
+];
+
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("p1-"+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("p1-"+k, JSON.stringify(v)); }catch(e){} }
+};
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = s => { s = Math.max(0, Math.round(s)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); };
+const plain = t => t.replace(/\[pause\]/g,"").replace(/\*/g,"");
+const words = t => plain(t).split(/\s+/).filter(Boolean).length;
+
+function renderText(t){
+  return esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[pause\]/g,'<span class="pause">pause</span>');
+}
+function lettersOf(t){
+  return esc(plain(t)).replace(/[A-Za-z0-9][A-Za-z0-9'’]*/g, w => w[0]);
+}
+
+function secWords(sec, withOpt){
+  return sec.paras.reduce((n,p) => n + ((p.opt && !withOpt) ? 0 : words(p.t || p.h)), 0);
+}
+
+/* ---------- Script ---------- */
+const optToggle = $("#opt-toggle"), lettersToggle = $("#letters-toggle");
+optToggle.checked = store.get("opt", true);
+lettersToggle.checked = store.get("letters", false);
+
+function renderScript(){
+  const withOpt = optToggle.checked, letters = lettersToggle.checked;
+  $("#letters-note").hidden = !letters;
+  const total = SECTIONS.reduce((n,s) => n + secWords(s, withOpt), 0);
+  $("#stats").innerHTML =
+    `<span><b>${total.toLocaleString()}</b> words</span>` +
+    `<span>Normal pace (140/min) <b>${fmt(total/140*60)}</b></span>` +
+    `<span>Fast pace (170/min) <b>${fmt(total/170*60)}</b></span>`;
+  let cum = 0;
+  $("#script").innerHTML = SECTIONS.map((s,i) => {
+    const w = secWords(s, withOpt), start = cum/150*60; cum += w;
+    const body = s.paras.filter(p => withOpt || !p.opt).map((p, j) => {
+      if (p.h) return `<p class="subhead">${esc(p.h)}</p>`;
+      if (letters) return `<p class="p hidden-words${p.opt?' opt':''}" data-s="${i}" data-j="${s.paras.indexOf(p)}" tabindex="0" title="Tap to reveal">${lettersOf(p.t)}</p>`;
+      return `<p class="p${p.opt?' opt':''}">${renderText(p.t)}</p>`;
+    }).join("");
+    return `<div class="sec"><div class="sec-head"><span class="beatno">Beat ${i+1}</span><h2>${esc(s.name)}</h2><span class="t">~${fmt(start)}</span></div><p class="cue">${esc(s.cue)}</p>${body}</div>`;
+  }).join("");
+}
+$("#script").addEventListener("click", e => {
+  const p = e.target.closest(".hidden-words"); if (!p) return;
+  const para = SECTIONS[p.dataset.s].paras[p.dataset.j];
+  if (p.dataset.open) { p.innerHTML = lettersOf(para.t); delete p.dataset.open; p.style.fontFamily=""; }
+  else { p.innerHTML = renderText(para.t); p.dataset.open = "1"; p.style.fontFamily="var(--f-body)"; }
+});
+$("#script").addEventListener("keydown", e => { if ((e.key==="Enter"||e.key===" ") && e.target.classList.contains("hidden-words")) { e.preventDefault(); e.target.click(); }});
+optToggle.addEventListener("change", () => { store.set("opt", optToggle.checked); renderScript(); });
+lettersToggle.addEventListener("change", () => { store.set("letters", lettersToggle.checked); renderScript(); });
+
+/* ---------- Beats ---------- */
+function renderBeats(){
+  $("#beats").innerHTML = SECTIONS.map((s,i) =>
+    `<button class="beat" data-i="${i}"><span class="beatno">Beat ${i+1}</span><h3>${esc(s.name)}</h3><p class="keys">${esc(s.keys)}</p></button>`).join("");
+}
+$("#beats").addEventListener("click", e => { const b = e.target.closest(".beat"); if (b) b.classList.toggle("covered"); });
+$("#cover-all").onclick = () => document.querySelectorAll(".beat").forEach(b => b.classList.add("covered"));
+$("#show-all").onclick = () => document.querySelectorAll(".beat").forEach(b => b.classList.remove("covered"));
+
+let quizOrder = [], quizPos = 0;
+function shuffle(){ quizOrder = QUIZ.map((_,i)=>i).sort(()=>Math.random()-.5); quizPos = 0; }
+function showQuiz(){
+  const [q,a] = QUIZ[quizOrder[quizPos]];
+  $("#quiz-q").textContent = q; $("#quiz-a").textContent = a; $("#quiz-a").hidden = true;
+}
+$("#quiz-reveal").onclick = () => { $("#quiz-a").hidden = false; };
+$("#quiz-next").onclick = () => { quizPos++; if (quizPos >= quizOrder.length) shuffle(); showQuiz(); };
+
+/* ---------- Practice ---------- */
+const targetSel = $("#target"), optPractice = $("#opt-practice");
+targetSel.value = String(store.get("target", 600));
+optPractice.checked = store.get("optp", true);
+let running = false, startAt = 0, elapsedBefore = 0, cur = 0, splits = [], tick = null, wake = null;
+
+function targets(){
+  const withOpt = optPractice.checked, T = +targetSel.value;
+  const ws = SECTIONS.map(s => secWords(s, withOpt)), total = ws.reduce((a,b)=>a+b,0);
+  let c = 0; return ws.map(w => { c += w; return c/total*T; });
+}
+function elapsed(){ return elapsedBefore + (running ? (Date.now()-startAt)/1000 : 0); }
+
+function verdict(actualEnd, targetEnd, prevActual, prevTarget){
+  const dA = actualEnd - prevActual, dT = targetEnd - prevTarget;
+  if (dA < dT*0.85) return ['fast','Too fast'];
+  if (dA > dT*1.15) return ['slow','Too slow'];
+  return ['good','On pace'];
+}
+
+function renderPractice(){
+  const T = +targetSel.value, tg = targets(), e = elapsed();
+  $("#clock").innerHTML = `${fmt(e)}<small>/ ${fmt(T)}</small>`;
+  $("#prog").style.width = Math.min(100, e/T*100) + "%";
+  const done = cur >= SECTIONS.length;
+  const s = SECTIONS[Math.min(cur, SECTIONS.length-1)];
+  $("#now-lbl").textContent = done ? "Finished" : (running || e>0 ? `Now · Beat ${cur+1} of 6` : "Up first");
+  $("#now-name").textContent = done ? `Total ${fmt(splits[splits.length-1] || e)}` : s.name;
+  $("#now-cue").textContent = done ? "" : s.cue;
+
+  let pace = "";
+  if (done) {
+    const fin = splits[splits.length-1], diff = fin - T;
+    pace = Math.abs(diff) <= 20 ? `Great run: ${fmt(fin)}, right on your limit.` :
+      diff < 0 ? `Finished ${fmt(-diff)} early. Slow down and use the pauses.` :
+      `${fmt(diff)} over the limit. Cut an optional part or tighten a story.`;
+  } else if (running || e>0) {
+    const goal = tg[cur], prev = cur ? splits[cur-1] : 0;
+    const left = goal - e;
+    pace = left >= 0 ? `Aim to finish this beat around ${fmt(goal)} (${fmt(left)} left).`
+                     : `Past this beat's target by ${fmt(-left)}. Move on when you can.`;
+    if (e > T) pace = `Over the ${fmt(T)} limit. Head to the closing.`;
+  } else pace = 'Press Start, then tap "Next section" each time you move on.';
+  $("#pace").textContent = pace;
+
+  $("#splits").innerHTML = SECTIONS.map((sec,i) => {
+    let you = "–", tag = "";
+    if (splits[i] !== undefined) {
+      you = fmt(splits[i]);
+      const [cls, txt] = verdict(splits[i], tg[i], i?splits[i-1]:0, i?tg[i-1]:0);
+      tag = `<span class="tag ${cls}">${txt}</span>`;
+    }
+    return `<tr class="${i===cur && (running||e>0) ? 'current':''}"><td>${i+1}. ${esc(sec.name)}</td><td class="num">${fmt(tg[i])}</td><td class="num">${you}</td><td>${tag}</td></tr>`;
+  }).join("");
+
+  $("#start").textContent = running ? "Pause" : (e>0 && !done ? "Resume" : "Start");
+  $("#start").disabled = done;
+  $("#next").disabled = !running || done;
+  $("#next").textContent = cur === SECTIONS.length-1 ? "Finish" : "Next section";
+}
+
+async function grabWake(){ try{ if (navigator.wakeLock) wake = await navigator.wakeLock.request("screen"); }catch(e){} }
+function dropWake(){ try{ wake && wake.release(); }catch(e){} wake = null; }
+
+$("#start").onclick = () => {
+  if (running) { elapsedBefore = elapsed(); running = false; clearInterval(tick); dropWake(); }
+  else { startAt = Date.now(); running = true; tick = setInterval(renderPractice, 250); grabWake(); }
+  renderPractice();
+};
+$("#next").onclick = () => {
+  splits[cur] = elapsed(); cur++;
+  if (cur >= SECTIONS.length) {
+    elapsedBefore = elapsed(); running = false; clearInterval(tick); dropWake();
+    const hist = store.get("history", []);
+    hist.unshift({ d: new Date().toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}), t: splits[splits.length-1] });
+    store.set("history", hist.slice(0, 8)); renderHistory();
+  }
+  renderPractice();
+};
+$("#reset").onclick = () => { running=false; clearInterval(tick); dropWake(); elapsedBefore=0; cur=0; splits=[]; renderPractice(); };
+targetSel.onchange = () => { store.set("target", +targetSel.value); renderPractice(); };
+optPractice.onchange = () => { store.set("optp", optPractice.checked); renderPractice(); };
+
+function renderHistory(){
+  const h = store.get("history", []);
+  $("#history").innerHTML = h.length ? h.map(r => `<span>${esc(r.d)} · <b>${fmt(r.t)}</b></span>`).join("")
+    : "<span>No full runs yet. Finish a run with the timer and it shows up here.</span>";
+}
+
+/* ---------- Tabs ---------- */
+function showTab(name){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab===name));
+  ["script","beats","practice"].forEach(n => $("#panel-"+n).hidden = n!==name);
+  store.set("tab", name);
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => showTab(t.dataset.tab));
+
+renderScript(); renderBeats(); shuffle(); showQuiz(); renderPractice(); renderHistory();
+showTab(store.get("tab","script"));
+</script>
