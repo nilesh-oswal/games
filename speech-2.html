@@ -1,0 +1,503 @@
+<title>Be One of the Seven</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a marked-up rehearsal script — ink on cool paper, highlighter marks for cues, one centered column with a tool bar on top */
+:root{
+  --paper:#edf2f1; --sheet:#ffffff; --ink:#1b2433; --ink-soft:#5a6578; --rule:#d5dbe4;
+  --mark:#ffc94d; --mark-ink:#3a2700; --accent:#0f766e; --accent-soft:#dcf1ee;
+  --good:#1f8a4c; --warn:#c77700; --bad:#c43a3a;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11151c; --sheet:#1a2029; --ink:#e7ebf2; --ink-soft:#9aa5b8; --rule:#2c3440;
+  --mark:#f2b93b; --mark-ink:#241800; --accent:#4fd1c0; --accent-soft:#16312f;
+  --good:#4cc37f; --warn:#f0a43a; --bad:#ef6b6b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11151c; --sheet:#1a2029; --ink:#e7ebf2; --ink-soft:#9aa5b8; --rule:#2c3440;
+  --mark:#f2b93b; --mark-ink:#241800; --accent:#4fd1c0; --accent-soft:#16312f;
+  --good:#4cc37f; --warn:#f0a43a; --bad:#ef6b6b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding-block:20px 60px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.eyebrow{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+h1 .hl{background:linear-gradient(transparent 55%, var(--mark) 55%);color:inherit;padding:0 .1em}
+.sub{color:var(--ink-soft);margin:0;font-size:15px}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;display:flex;gap:6px;
+  background:var(--paper);padding-block:10px;border-bottom:1px solid var(--rule);margin-bottom:18px;flex-wrap:wrap}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--paper)}
+.tab{font-family:var(--f-display);font-weight:700;font-size:15px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);
+  padding:8px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+button:focus-visible,.tab:focus-visible,input:focus-visible+label,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.panel{display:flex;flex-direction:column;gap:16px}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;font-family:var(--f-display);font-size:14px;color:var(--ink-soft)}
+.switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.switch input{width:18px;height:18px;accent-color:var(--accent)}
+.stats{font-family:var(--f-mono);font-size:13px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap}
+.stats b{color:var(--ink)}
+
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:22px clamp(16px,4vw,32px)}
+.sec{display:flex;flex-direction:column;gap:12px;padding-block:18px;border-top:1px dashed var(--rule)}
+.sec:first-child{border-top:0;padding-top:0}
+.sec-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.beatno{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:4px}
+.sec-head h2{font-family:var(--f-display);font-size:20px;margin:0;font-weight:700}
+.sec-head .t{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-left:auto}
+.cue{font-family:var(--f-display);font-size:14px;color:var(--ink-soft);margin:0}
+.p{margin:0;max-width:65ch}
+.p.opt{border-left:3px solid var(--mark);padding-left:12px}
+.p.opt::before{content:"OPTIONAL · cut if long";display:block;font-family:var(--f-display);font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--warn);margin-bottom:2px}
+.pause{display:inline-block;font-family:var(--f-display);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--mark);color:var(--mark-ink);padding:1px 7px;border-radius:3px;margin:0 2px;vertical-align:2px}
+.p.hidden-words{cursor:pointer;color:var(--ink-soft);font-family:var(--f-mono);font-size:14px;letter-spacing:.02em}
+.p.hidden-words:hover{color:var(--ink)}
+.subhead{font-family:var(--f-display);font-weight:700;font-size:15px;margin:4px 0 0;color:var(--ink)}
+
+/* Beats */
+.beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.beat{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px;text-align:left;cursor:pointer;color:var(--ink);font:inherit;min-width:0}
+.beat .beatno{align-self:flex-start}
+.beat h3{font-family:var(--f-display);font-size:18px;margin:0}
+.beat .keys{margin:0;color:var(--ink-soft);font-size:14.5px}
+.beat.covered .keys{filter:blur(6px);user-select:none}
+.beat.covered::after{content:"Tap to reveal";font-family:var(--f-display);font-size:12px;color:var(--accent);font-weight:700}
+.btn{font-family:var(--f-display);font-weight:700;font-size:15px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:9px 16px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.quiz{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.quiz .q{font-family:var(--f-display);font-size:20px;font-weight:700;margin:0;text-wrap:balance}
+.quiz .a{margin:0;padding:12px;background:var(--accent-soft);border-radius:8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* Practice */
+.timer-card{background:var(--ink);color:var(--sheet);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.clock{font-family:var(--f-mono);font-weight:700;font-size:clamp(56px,16vw,96px);line-height:1;font-variant-numeric:tabular-nums}
+.clock small{font-size:.3em;opacity:.7;margin-left:8px}
+.now{display:flex;flex-direction:column;gap:4px}
+.now .lbl{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.now .name{font-family:var(--f-display);font-size:22px;font-weight:800}
+.now .cue2{font-size:15px;opacity:.85}
+.progress{height:8px;background:color-mix(in srgb, var(--sheet) 20%, transparent);border-radius:99px;overflow:hidden;position:relative}
+.progress i{position:absolute;inset:0 auto 0 0;background:var(--mark);width:0}
+.timer-card .btn{background:transparent;color:var(--sheet);border-color:color-mix(in srgb, var(--sheet) 40%, transparent)}
+.timer-card .btn.primary{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.pace{font-family:var(--f-display);font-weight:700;font-size:15px;padding:8px 12px;border-radius:8px;background:color-mix(in srgb, var(--sheet) 12%, transparent)}
+.splits{width:100%;border-collapse:collapse;font-size:14.5px}
+.splits th,.splits td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:left}
+.splits th{font-family:var(--f-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.splits td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.splits tr.current td{background:var(--accent-soft)}
+.tag{font-family:var(--f-display);font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.tag.good{color:var(--good);border:1px solid var(--good)}
+.tag.fast{color:var(--warn);border:1px solid var(--warn)}
+.tag.slow{color:var(--bad);border:1px solid var(--bad)}
+.tablebox{overflow-x:auto}
+.tips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.note{font-size:14px;color:var(--ink-soft);margin:0}
+.history{font-family:var(--f-mono);font-size:13px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+@media (prefers-reduced-motion:no-preference){.progress i{transition:width .4s linear}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Original Oratory · Rehearsal kit</span>
+    <h1>Be One of the <span class="hl">Seven</span></h1>
+    <p class="sub">A speech about the people we walk past. Read it, learn the seven beats, then run it against the clock.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-script" aria-selected="true" data-tab="script">Script</button>
+    <button class="tab" role="tab" id="tab-beats" aria-selected="false" data-tab="beats">Memorize</button>
+    <button class="tab" role="tab" id="tab-practice" aria-selected="false" data-tab="practice">Practice timer</button>
+  </nav>
+
+  <!-- SCRIPT -->
+  <section class="panel" id="panel-script">
+    <div class="bar">
+      <label class="switch"><input type="checkbox" id="opt-toggle" checked> Show optional parts</label>
+      <label class="switch"><input type="checkbox" id="letters-toggle"> First-letter mode</label>
+    </div>
+    <div class="stats" id="stats"></div>
+    <p class="note" id="letters-note" hidden>First-letter mode shows only the first letter of each word. Say the full sentence out loud, then tap a paragraph to check yourself.</p>
+    <div class="sheet" id="script"></div>
+  </section>
+
+  <!-- BEATS -->
+  <section class="panel" id="panel-beats" hidden>
+    <p class="note">These seven beats are the whole speech. Tap a card to hide or show its details, then try to say each beat from the title alone.</p>
+    <div class="row">
+      <button class="btn" id="cover-all">Hide all details</button>
+      <button class="btn" id="show-all">Show all</button>
+    </div>
+    <div class="beats" id="beats"></div>
+
+    <div class="quiz">
+      <span class="eyebrow">What comes next?</span>
+      <p class="q" id="quiz-q"></p>
+      <p class="a" id="quiz-a" hidden></p>
+      <div class="row">
+        <button class="btn primary" id="quiz-reveal">Reveal</button>
+        <button class="btn" id="quiz-next">Next question</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section class="panel" id="panel-practice" hidden>
+    <div class="bar">
+      <label for="target">Time limit</label>
+      <select id="target" class="btn">
+        <option value="600">10:00</option>
+        <option value="720">12:00</option>
+        <option value="900" selected>15:00</option>
+      </select>
+      <label class="switch"><input type="checkbox" id="opt-practice" checked> Include optional parts</label>
+    </div>
+
+    <div class="timer-card">
+      <div class="clock" id="clock">0:00<small id="clock-of">/ 15:00</small></div>
+      <div class="progress"><i id="prog"></i></div>
+      <div class="now">
+        <span class="lbl" id="now-lbl">Up first</span>
+        <span class="name" id="now-name"></span>
+        <span class="cue2" id="now-cue"></span>
+      </div>
+      <div class="pace" id="pace">Press Start, then tap "Next section" each time you move on.</div>
+      <div class="row">
+        <button class="btn primary" id="start">Start</button>
+        <button class="btn" id="next" disabled>Next section</button>
+        <button class="btn" id="reset">Reset</button>
+      </div>
+    </div>
+
+    <div class="tablebox">
+      <table class="splits">
+        <thead><tr><th>Section</th><th>Target</th><th>You</th><th></th></tr></thead>
+        <tbody id="splits"></tbody>
+      </table>
+    </div>
+    <p class="note">Targets are based on how many words each section has, so they shift when you include or drop the optional parts.</p>
+
+    <div class="sheet">
+      <p class="subhead">Past runs</p>
+      <div class="history" id="history"></div>
+    </div>
+
+    <div class="sheet">
+      <p class="subhead">If you talk fast</p>
+      <ul class="tips">
+        <li>A yellow <span class="pause">pause</span> mark in the script means a full two-second stop. Count it in your head.</li>
+        <li>If a section shows <span class="tag fast">Too fast</span>, run just that section again and slow the stories down, not the facts.</li>
+        <li>If you blank, think "subway." Every section ties back to the violinist and the seven who stopped.</li>
+        <li>Skipped a point? Keep going. Nobody in the audience knows the script.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+const SECTIONS = [
+ { id:"open", name:"The violinist in the subway", cue:"Imagine the subway → man in a cap → 1,000 walk past, 7 stop → it was Joshua Bell → thesis",
+   keys:"Cold January morning, DC subway, man in a baseball cap with a violin. ~45 min, 1,000+ walked past, 7 stopped, ~$32, no applause. It was Joshua Bell: sold-out Boston show, $100 seats, 300-year-old Stradivarius. Washington Post experiment. They judged the music by its frame. Thesis: where, looks, labels, then how to do better.",
+   paras:[
+  {t:"Imagine it's a cold Friday morning in January. You're rushing through a subway station in Washington, D.C. You're late. You've got a coffee in one hand and your phone in the other. Near the escalator, there's a man in jeans, a long-sleeved T-shirt, and a baseball cap, playing the violin. His case is open on the floor for spare change."},
+  {t:"Do you stop? [pause]"},
+  {t:"Be honest. Most of us wouldn't. And on that morning in 2007, most people didn't."},
+  {t:"The man played for about forty-five minutes. More than a thousand people walked past him. Only seven stopped to listen for even a minute. He made about thirty-two dollars. When he finished, nobody clapped. Nobody even noticed he was gone."},
+  {t:"Here's what those thousand people didn't know. [pause] The man in the baseball cap was Joshua Bell, one of the most famous violinists in the world. Just a few days earlier, he had played to a sold-out concert hall in Boston, where people paid around a hundred dollars a seat. The violin in his hands was more than three hundred years old, handmade by Antonio Stradivari, and worth millions of dollars. And the music he played was some of the most beautiful and difficult music ever written."},
+  {t:"This was an experiment set up by the Washington Post. They wanted to answer one simple question: if we see something beautiful in a place where we don't expect it, will we even recognize it?"},
+  {t:"The answer, for almost everyone, was no."},
+  {t:"Now, those people weren't bad people. They were busy. They had jobs, meetings, kids to drop off at school. But that's exactly the point. They didn't decide the music was bad. They never really heard it. They saw a man in a cap with an open case in a subway station, and their brains filled in the rest: just a street musician. Not worth my time."},
+  {t:"They judged the music by its frame. [pause]"},
+  {t:"And we do this every day, not just with music, but with people."},
+  {t:"Today I want to talk about three ways we judge too fast: by where we see someone, by how they look, and by the labels we give them. Then I want to talk about how we can do better, because the cost of walking past is much bigger than we think."}
+ ]},
+ { id:"where", name:"We judge by where", cue:"Brain shortcuts → same man, different frame → cashier, janitor, new student → every child tried to stop",
+   keys:"Princeton: first impression in a tenth of a second. Context is a shortcut: concert hall = amazed, subway = ignore. Same man, same violin. Cashier, janitor, new student. Every child tried to stop; every parent pulled them along. Somewhere we learn to walk past.",
+   paras:[
+  {t:"First, we judge people by where we see them."},
+  {t:"Our brains love shortcuts. Researchers at Princeton found that we form a first impression of someone's face in about a tenth of a second. That's faster than a blink. And one of the biggest shortcuts our brain uses is context: where we are, and what's around us."},
+  {t:"In a concert hall, with a stage and a spotlight and a ticket that cost a hundred dollars, we're ready to be amazed. In a subway station, surrounded by trash cans and ads, we're ready to ignore. Same man. Same violin. Same music. The only thing that changed was the frame."},
+  {t:"Now imagine the opposite. Imagine that same man, in a tuxedo, walking onto a giant stage under bright lights while an announcer says, “Please welcome the world-famous Joshua Bell.” He plays the exact same notes. This time, people cry. They stand up and cheer. They tell their friends about it for weeks. Nothing about the music changed. Only the frame did. And the frame decided whether people walked past or stood up and cheered."},
+  {t:"Think about what that means. The music didn't get worse underground. Joshua Bell didn't get worse. A Stradivarius sounds exactly the same in a subway as it does on a stage. The only thing that got worse was how closely people were paying attention.", opt:true},
+  {t:"Now think about how often that happens with people. The person working the cash register at the grocery store. The janitor who cleans our school after we go home. The new student who just moved here and doesn't know where anything is yet. We see them in a certain place, and we quietly decide who they are and how much they matter."},
+  {t:"But the janitor might be working extra shifts to send three kids to college. The cashier might be studying at night to become a nurse. The new student might have been the top of her class at her old school. We would never know, because we already decided, based on where we saw them."},
+  {t:"And here's the detail from the subway experiment that I can't stop thinking about. [pause] Every time a child walked by, the child tried to stop and watch. Every single time. And every single time, a parent pulled them along."},
+  {t:"The kids hadn't learned the shortcut yet. They didn't know a subway musician was supposed to be ignored. They just heard something beautiful and wanted to listen."},
+  {t:"Somewhere between being a kid and being an adult, we learn to walk past. [pause]"}
+ ]},
+ { id:"looks", name:"We judge by looks", cue:"Susan Boyle walks on stage → audience laughs → she sings → why were we surprised?",
+   keys:"2009 British TV talent show. 47, small Scottish village, frizzy hair, plain dress. Audience laughed and rolled eyes. She sang; standing ovation. Watched tens of millions of times. Why were we surprised? We had a picture of what talent looks like. She got her moment; most people never do.",
+   paras:[
+  {t:"The second way we judge too fast is by how someone looks."},
+  {t:"In 2009, a woman walked onto the stage of a TV talent show in Britain. She was forty-seven years old, from a small village in Scotland. Her hair was frizzy, her dress was plain, and she seemed a little awkward. When she told the judges her dream was to become a professional singer, the audience laughed. You could see people in the crowd rolling their eyes. One of the judges looked like he was trying not to smirk."},
+  {t:"Her name was Susan Boyle."},
+  {t:"And then the music started, and she opened her mouth, and she sang. [pause]"},
+  {t:"Within seconds, the room changed. The people who had been laughing were on their feet. The judges' jaws dropped. By the end, the whole theater was giving her a standing ovation."},
+  {t:"The video of that moment was watched tens of millions of times within days. Her first album became one of the fastest-selling debut albums in British history."},
+  {t:"But here's the question that makes that video uncomfortable to watch: [pause] Why were we surprised?"},
+  {t:"Why did an entire audience decide, before she sang a single note, that she couldn't be good? Nothing about her hair or her dress had anything to do with her voice. We just had a picture in our heads of what a talented person is supposed to look like, and she didn't match it."},
+  {t:"And we do this even faster online. We scroll past people in less than a second. We judge someone by one photo, one video, or one comment. We decide if they are cool, or cringe, or worth following, before we know a single real thing about them. Our phones have turned all of us into the audience that laughed before she sang.", opt:true},
+  {t:"Susan Boyle got lucky. She got her moment: a stage, a microphone, and three minutes to prove everyone wrong. Most people never get that moment. Most people who don't fit the picture just get laughed at, ignored, or passed over. And then they go home, and nobody ever finds out what they could have done."},
+  {t:"Think about how many Susan Boyles might be around us right now. The quiet kid in the back of the class who writes incredible stories nobody has read. The classmate who is still learning English but is brilliant at math. The older neighbor everyone calls grumpy, who might have lived the most interesting life on the whole street. Nobody asks, so nobody knows.", opt:true}
+ ]},
+ { id:"labels", name:"We judge by labels", cue:"Orchestras behind a screen → more women chosen → labels change what we hear → school labels",
+   keys:"Top US orchestras were almost all men. 1970s–80s: auditions behind a screen, even carpet so judges couldn't hear heels. More women made it through. Claudia Goldin (later Nobel Prize) studied it. Experts who believed they were fair. Labels change what we see and hear. School: jock, nerd, quiet one, troublemaker, “not a math person.” One word is never enough.",
+   paras:[
+  {t:"The third way we judge too fast is the hardest to notice. We judge by labels."},
+  {t:"Here's another true story from the world of music. For a long time, America's top orchestras were made up almost entirely of men. The judges at auditions said they were simply picking the best musicians. And they believed it."},
+  {t:"Then, starting in the 1970s and 80s, many orchestras tried something new. Musicians auditioned behind a screen, so the judges could hear the music but couldn't see who was playing. Some orchestras even laid carpet on the floor, so the judges couldn't hear the click of high heels walking in."},
+  {t:"And something changed. When the judges couldn't see who was playing, more women started making it through. Over the following decades, the number of women in top orchestras grew dramatically. Economists who studied this, including Claudia Goldin, who later won the Nobel Prize, found that the screen made a real difference."},
+  {t:"Think about that. [pause] The judges were experts. They loved music. They truly believed they were being fair. And still, without realizing it, a label changed what they heard."},
+  {t:"That's the scary thing about labels. They don't just change what we think. They can change what we actually see and hear."},
+  {t:"And we use labels all the time. At school, there's one for almost everyone. The jock. The nerd. The weird kid. The quiet one. The troublemaker. Once a label sticks, it works like a screen in reverse. Instead of hiding who someone is, it hides everything except one word."},
+  {t:"And labels are sticky. A label can start from one moment: one wrong answer in class, one bad day, one embarrassing thing in the cafeteria. Then it follows a person for years, like a nickname from second grade that nobody lets you forget. The person grows and changes, but the label stays exactly the same."},
+  {t:"If you're labeled “the quiet one,” people stop asking your opinion. If you're labeled “the troublemaker,” teachers notice every mistake and miss every good thing you do. If you're labeled “not a math person,” you stop raising your hand, and eventually you start believing it yourself."},
+  {t:"A label takes a whole person and shrinks them down to one word. [pause] And one word is never big enough to hold a person."}
+ ]},
+ { id:"counter", name:"“But we're all busy”", cue:"Fair point → not stopping for everyone → “no time” vs. “not worth my time” → a start, not a final answer",
+   keys:"We can't get to know everyone. Shortcuts exist for a reason. Not asking you to stop for everyone; notice when your brain decided for you. “I don't have time” ≠ “not worth my time.” First impressions can be right, but they're a starting point, not a final answer.",
+   paras:[
+  {t:"Now, some of you might be thinking: “Okay, but we can't stop and get to know everyone. We'd never get anywhere.” And that's fair."},
+  {t:"The people in that subway station really were busy. You can't stop for every street musician, talk to every stranger, or deeply understand every person you pass. Our brains take shortcuts for a reason. Without them, we couldn't get through a single day."},
+  {t:"But I'm not asking you to stop for everyone. I'm asking you to notice when your brain has made a decision for you."},
+  {t:"There's a big difference between “I don't have time right now” and “That person isn't worth my time.” The first one is about your schedule. The second one is a judgment about a human being, based on almost nothing."},
+  {t:"And noticing costs nothing. It doesn't take time out of your day. It doesn't make you late. It's just a small moment of honesty with yourself, where you admit that your brain made up a story about someone, and that the story might be wrong."},
+  {t:"And yes, sometimes first impressions are right. Sometimes a person really is rude. But even then, a first impression should be a starting point, not a final answer. People are more than their worst moment, their clothes, their job, or the place we happened to see them."}
+ ]},
+ { id:"fix", name:"Stop. Look. Listen.", cue:"Stop: notice the judgment → Look: past the frame → Listen: hear the music in people",
+   keys:"Three habits from the subway. STOP: notice “I just made a judgment.” LOOK past the frame: would I see them differently somewhere else? What else could be true? LISTEN: ask a real question and actually hear the answer. They never heard the music.",
+   paras:[
+  {t:"So what can we actually do? I want to leave you with three small habits, and they come straight from that subway station: Stop. Look. Listen."},
+  {h:"First, stop."},
+  {t:"Not physically, every time, but in your head. When you catch yourself making a quick judgment about the new kid, the person sitting alone, or someone who looks or sounds different, just stop for one second and notice it. Say to yourself: “I just made a judgment.” That's it. You don't have to feel guilty. Just notice it. You can't change a habit you can't see."},
+  {h:"Second, look."},
+  {t:"Look past the frame. Ask yourself: “If I saw this person somewhere else, would I think about them differently?” If the cashier were on a stage. If the quiet kid were giving a speech. If the new student were wearing the “right” clothes. If the answer is yes, then the problem isn't the person. It's the frame."},
+  {t:"Another way to look is to ask: “What else could be true?” The person who seems rude might be having the worst day of their life. The kid who never talks might be thinking the most interesting thoughts in the room. There is almost always more to the story than what we can see.", opt:true},
+  {h:"Third, listen."},
+  {t:"Actually listen. Ask someone a real question, like “What are you into?” or “What's something people don't know about you?”, and then really listen to the answer, instead of just waiting for your turn to talk."},
+  {t:"Imagine asking the quiet kid in your class that question. Maybe they tell you they build their own computers. Maybe they write songs. Maybe they help take care of their little brothers and sisters every night. In ten seconds, they stop being “the quiet one” and become a real person to you. And maybe, for the first time all week, someone actually listened to them.", opt:true},
+  {t:"Remember the people in the subway. They didn't decide the music was bad. They just never heard it. Listening is how we hear the music in people."},
+  {t:"Stop. Look. Listen. It takes a few seconds. But it can change how you see someone forever."}
+ ]},
+ { id:"close", name:"Be one of the seven", cue:"Back to the subway → seven stopped → “I want to be one of the seven” → challenge → music all around us",
+   keys:"Back to the subway. 1,000+ walked past, but seven stopped. One knew nothing about classical music; it made him feel at peace. I want to be one of the seven: notice the music, sit with the new kid, listen to the quiet one. Challenge: one person this week. Stradivarius in a subway. People play music all the time; do we stop long enough to hear it?",
+   paras:[
+  {t:"Let's go back to that subway station one more time."},
+  {t:"More than a thousand people walked past Joshua Bell that morning. But seven people stopped. [pause]"},
+  {t:"Think about what it must have felt like to be Joshua Bell that morning. One of the best musicians alive, playing his heart out, and watching person after person look straight through him. He later described how strange it felt to finish a piece of music and hear nothing at all. No applause. Just silence, and footsteps hurrying past."},
+  {t:"One of them later said he knew almost nothing about classical music. He just felt something, so he stood there and listened. He said it made him feel at peace."},
+  {t:"I don't know about you, but I want to be one of the seven."},
+  {t:"I want to be the person who notices the music before anyone tells me it's famous. I want to be the person who sits next to the new kid before they've proven they're cool. I want to be the person who listens to the quiet one, because quiet doesn't mean empty."},
+  {t:"So here's my challenge for you. This week, find one person you've been walking past. Maybe it's a classmate, a neighbor, or someone who works at your school. Stop. Look. Listen. Ask them one real question."},
+  {t:"You might discover a Stradivarius in a subway station."},
+  {t:"Because the people around us are playing music all the time. [pause] The only question is whether we'll stop long enough to hear it."},
+  {t:"Thank you."}
+ ]}
+];
+
+const QUIZ = [
+ ["How does the speech open?","“Imagine it's a cold Friday morning in January” in a Washington, D.C. subway station, with a man in a baseball cap playing violin."],
+ ["What happened in the subway?","He played about 45 minutes. More than a thousand people walked past, seven stopped, he made about $32, and nobody clapped."],
+ ["Who was the violinist, and what was special about him?","Joshua Bell, one of the world's most famous violinists. Days earlier he sold out a Boston concert hall, and his violin was a 300-year-old Stradivarius worth millions."],
+ ["Who set up the experiment, and what did they want to know?","The Washington Post. Would people recognize something beautiful in a place they didn't expect it?"],
+ ["What's the key line about the subway crowd?","They judged the music by its frame."],
+ ["What are the three ways we judge too fast?","By where we see someone, by how they look, and by the labels we give them."],
+ ["What's the research fact in “We judge by where”?","Princeton researchers found we form a first impression of a face in about a tenth of a second."],
+ ["Which three people show “judging by where”?","The cashier, the janitor, and the new student."],
+ ["What did every child in the subway do?","Tried to stop and watch, and every parent pulled them along. Somewhere we learn to walk past."],
+ ["Tell the Susan Boyle story in one breath.","2009 talent show: 47, from a small Scottish village, plain dress. The audience laughed. She sang and got a standing ovation; the video was watched tens of millions of times."],
+ ["What uncomfortable question follows Susan Boyle?","Why were we surprised? We had a picture of what talent looks like."],
+ ["What changed in orchestra auditions?","Musicians played behind a screen, some even over carpet, so judges couldn't see or hear who it was. More women got chosen."],
+ ["What's the scary thing about labels?","They don't just change what we think. They change what we actually see and hear."],
+ ["How do you answer “but we're all busy”?","“I don't have time right now” is different from “that person isn't worth my time.” A first impression is a starting point, not a final answer."],
+ ["What are the three habits?","Stop. Look. Listen."],
+ ["What's the question for “Look”?","If I saw this person somewhere else, would I think about them differently?"],
+ ["What's the line that ties Listen back to the subway?","They didn't decide the music was bad. They just never heard it. Listening is how we hear the music in people."],
+ ["What's the closing line?","The people around us are playing music all the time. The only question is whether we'll stop long enough to hear it."]
+];
+
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("p7-"+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("p7-"+k, JSON.stringify(v)); }catch(e){} }
+};
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = s => { s = Math.max(0, Math.round(s)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); };
+const plain = t => t.replace(/\[pause\]/g,"").replace(/\*/g,"");
+const words = t => plain(t).split(/\s+/).filter(Boolean).length;
+
+function renderText(t){
+  return esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[pause\]/g,'<span class="pause">pause</span>');
+}
+function lettersOf(t){
+  return esc(plain(t)).replace(/[A-Za-z0-9][A-Za-z0-9'’]*/g, w => w[0]);
+}
+
+function secWords(sec, withOpt){
+  return sec.paras.reduce((n,p) => n + ((p.opt && !withOpt) ? 0 : words(p.t || p.h)), 0);
+}
+
+/* ---------- Script ---------- */
+const optToggle = $("#opt-toggle"), lettersToggle = $("#letters-toggle");
+optToggle.checked = store.get("opt", true);
+lettersToggle.checked = store.get("letters", false);
+
+function renderScript(){
+  const withOpt = optToggle.checked, letters = lettersToggle.checked;
+  $("#letters-note").hidden = !letters;
+  const total = SECTIONS.reduce((n,s) => n + secWords(s, withOpt), 0);
+  $("#stats").innerHTML =
+    `<span><b>${total.toLocaleString()}</b> words</span>` +
+    `<span>Normal pace (140/min) <b>${fmt(total/140*60)}</b></span>` +
+    `<span>Fast pace (170/min) <b>${fmt(total/170*60)}</b></span>`;
+  let cum = 0;
+  $("#script").innerHTML = SECTIONS.map((s,i) => {
+    const w = secWords(s, withOpt), start = cum/150*60; cum += w;
+    const body = s.paras.filter(p => withOpt || !p.opt).map((p, j) => {
+      if (p.h) return `<p class="subhead">${esc(p.h)}</p>`;
+      if (letters) return `<p class="p hidden-words${p.opt?' opt':''}" data-s="${i}" data-j="${s.paras.indexOf(p)}" tabindex="0" title="Tap to reveal">${lettersOf(p.t)}</p>`;
+      return `<p class="p${p.opt?' opt':''}">${renderText(p.t)}</p>`;
+    }).join("");
+    return `<div class="sec"><div class="sec-head"><span class="beatno">Beat ${i+1}</span><h2>${esc(s.name)}</h2><span class="t">~${fmt(start)}</span></div><p class="cue">${esc(s.cue)}</p>${body}</div>`;
+  }).join("");
+}
+$("#script").addEventListener("click", e => {
+  const p = e.target.closest(".hidden-words"); if (!p) return;
+  const para = SECTIONS[p.dataset.s].paras[p.dataset.j];
+  if (p.dataset.open) { p.innerHTML = lettersOf(para.t); delete p.dataset.open; p.style.fontFamily=""; }
+  else { p.innerHTML = renderText(para.t); p.dataset.open = "1"; p.style.fontFamily="var(--f-body)"; }
+});
+$("#script").addEventListener("keydown", e => { if ((e.key==="Enter"||e.key===" ") && e.target.classList.contains("hidden-words")) { e.preventDefault(); e.target.click(); }});
+optToggle.addEventListener("change", () => { store.set("opt", optToggle.checked); renderScript(); });
+lettersToggle.addEventListener("change", () => { store.set("letters", lettersToggle.checked); renderScript(); });
+
+/* ---------- Beats ---------- */
+function renderBeats(){
+  $("#beats").innerHTML = SECTIONS.map((s,i) =>
+    `<button class="beat" data-i="${i}"><span class="beatno">Beat ${i+1}</span><h3>${esc(s.name)}</h3><p class="keys">${esc(s.keys)}</p></button>`).join("");
+}
+$("#beats").addEventListener("click", e => { const b = e.target.closest(".beat"); if (b) b.classList.toggle("covered"); });
+$("#cover-all").onclick = () => document.querySelectorAll(".beat").forEach(b => b.classList.add("covered"));
+$("#show-all").onclick = () => document.querySelectorAll(".beat").forEach(b => b.classList.remove("covered"));
+
+let quizOrder = [], quizPos = 0;
+function shuffle(){ quizOrder = QUIZ.map((_,i)=>i).sort(()=>Math.random()-.5); quizPos = 0; }
+function showQuiz(){
+  const [q,a] = QUIZ[quizOrder[quizPos]];
+  $("#quiz-q").textContent = q; $("#quiz-a").textContent = a; $("#quiz-a").hidden = true;
+}
+$("#quiz-reveal").onclick = () => { $("#quiz-a").hidden = false; };
+$("#quiz-next").onclick = () => { quizPos++; if (quizPos >= quizOrder.length) shuffle(); showQuiz(); };
+
+/* ---------- Practice ---------- */
+const targetSel = $("#target"), optPractice = $("#opt-practice");
+targetSel.value = String(store.get("target", 900));
+optPractice.checked = store.get("optp", true);
+let running = false, startAt = 0, elapsedBefore = 0, cur = 0, splits = [], tick = null, wake = null;
+
+function targets(){
+  const withOpt = optPractice.checked, T = +targetSel.value;
+  const ws = SECTIONS.map(s => secWords(s, withOpt)), total = ws.reduce((a,b)=>a+b,0);
+  let c = 0; return ws.map(w => { c += w; return c/total*T; });
+}
+function elapsed(){ return elapsedBefore + (running ? (Date.now()-startAt)/1000 : 0); }
+
+function verdict(actualEnd, targetEnd, prevActual, prevTarget){
+  const dA = actualEnd - prevActual, dT = targetEnd - prevTarget;
+  if (dA < dT*0.85) return ['fast','Too fast'];
+  if (dA > dT*1.15) return ['slow','Too slow'];
+  return ['good','On pace'];
+}
+
+function renderPractice(){
+  const T = +targetSel.value, tg = targets(), e = elapsed();
+  $("#clock").innerHTML = `${fmt(e)}<small>/ ${fmt(T)}</small>`;
+  $("#prog").style.width = Math.min(100, e/T*100) + "%";
+  const done = cur >= SECTIONS.length;
+  const s = SECTIONS[Math.min(cur, SECTIONS.length-1)];
+  $("#now-lbl").textContent = done ? "Finished" : (running || e>0 ? `Now · Beat ${cur+1} of ${SECTIONS.length}` : "Up first");
+  $("#now-name").textContent = done ? `Total ${fmt(splits[splits.length-1] || e)}` : s.name;
+  $("#now-cue").textContent = done ? "" : s.cue;
+
+  let pace = "";
+  if (done) {
+    const fin = splits[splits.length-1], diff = fin - T;
+    pace = Math.abs(diff) <= 20 ? `Great run: ${fmt(fin)}, right on your limit.` :
+      diff < 0 ? `Finished ${fmt(-diff)} early. Slow down and use the pauses.` :
+      `${fmt(diff)} over the limit. Cut an optional part or tighten a story.`;
+  } else if (running || e>0) {
+    const goal = tg[cur], prev = cur ? splits[cur-1] : 0;
+    const left = goal - e;
+    pace = left >= 0 ? `Aim to finish this beat around ${fmt(goal)} (${fmt(left)} left).`
+                     : `Past this beat's target by ${fmt(-left)}. Move on when you can.`;
+    if (e > T) pace = `Over the ${fmt(T)} limit. Head to the closing.`;
+  } else pace = 'Press Start, then tap "Next section" each time you move on.';
+  $("#pace").textContent = pace;
+
+  $("#splits").innerHTML = SECTIONS.map((sec,i) => {
+    let you = "–", tag = "";
+    if (splits[i] !== undefined) {
+      you = fmt(splits[i]);
+      const [cls, txt] = verdict(splits[i], tg[i], i?splits[i-1]:0, i?tg[i-1]:0);
+      tag = `<span class="tag ${cls}">${txt}</span>`;
+    }
+    return `<tr class="${i===cur && (running||e>0) ? 'current':''}"><td>${i+1}. ${esc(sec.name)}</td><td class="num">${fmt(tg[i])}</td><td class="num">${you}</td><td>${tag}</td></tr>`;
+  }).join("");
+
+  $("#start").textContent = running ? "Pause" : (e>0 && !done ? "Resume" : "Start");
+  $("#start").disabled = done;
+  $("#next").disabled = !running || done;
+  $("#next").textContent = cur === SECTIONS.length-1 ? "Finish" : "Next section";
+}
+
+async function grabWake(){ try{ if (navigator.wakeLock) wake = await navigator.wakeLock.request("screen"); }catch(e){} }
+function dropWake(){ try{ wake && wake.release(); }catch(e){} wake = null; }
+
+$("#start").onclick = () => {
+  if (running) { elapsedBefore = elapsed(); running = false; clearInterval(tick); dropWake(); }
+  else { startAt = Date.now(); running = true; tick = setInterval(renderPractice, 250); grabWake(); }
+  renderPractice();
+};
+$("#next").onclick = () => {
+  splits[cur] = elapsed(); cur++;
+  if (cur >= SECTIONS.length) {
+    elapsedBefore = elapsed(); running = false; clearInterval(tick); dropWake();
+    const hist = store.get("history", []);
+    hist.unshift({ d: new Date().toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}), t: splits[splits.length-1] });
+    store.set("history", hist.slice(0, 8)); renderHistory();
+  }
+  renderPractice();
+};
+$("#reset").onclick = () => { running=false; clearInterval(tick); dropWake(); elapsedBefore=0; cur=0; splits=[]; renderPractice(); };
+targetSel.onchange = () => { store.set("target", +targetSel.value); renderPractice(); };
+optPractice.onchange = () => { store.set("optp", optPractice.checked); renderPractice(); };
+
+function renderHistory(){
+  const h = store.get("history", []);
+  $("#history").innerHTML = h.length ? h.map(r => `<span>${esc(r.d)} · <b>${fmt(r.t)}</b></span>`).join("")
+    : "<span>No full runs yet. Finish a run with the timer and it shows up here.</span>";
+}
+
+/* ---------- Tabs ---------- */
+function showTab(name){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab===name));
+  ["script","beats","practice"].forEach(n => $("#panel-"+n).hidden = n!==name);
+  store.set("tab", name);
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => showTab(t.dataset.tab));
+
+renderScript(); renderBeats(); shuffle(); showQuiz(); renderPractice(); renderHistory();
+showTab(store.get("tab","script"));
+</script>
